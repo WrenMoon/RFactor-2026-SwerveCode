@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
-
+import edu.wpi.first.wpilibj2.command.RunCommand;
 
 import java.io.File;
 
@@ -29,6 +29,7 @@ import javax.print.attribute.standard.PageRanges;
 
 import com.pathplanner.lib.auto.NamedCommands;
 
+import frc.robot.Commands.LUTAutoShootCommand;
 import frc.robot.Commands.gridSnap;
 import frc.robot.Subsystems.*;
 
@@ -73,52 +74,53 @@ public class RobotContainer {
     driverController.button(1).whileTrue(new gridSnap(swerve, 0, 0));
     
 
-    // ── Operator — Intake ─────────────────────────────────────────────────
-    // R2 held -> deploy arm + rollers IN
-    operatorController.R2().whileTrue(
-        new StartEndCommand(
-            () -> { intakeSubsystem.deploy(); intakeSubsystem.runRollerIntake(); },
-            ()  -> intakeSubsystem.stopRoller(),
-            intakeSubsystem));
+    // ── Operator — Square: intake outtake ─────────────────────────────────
+        operatorController.L1().whileTrue(
+            new StartEndCommand(
+                intakeSubsystem::runRollerOuttake,
+                intakeSubsystem::stopRoller,
+                intakeSubsystem));
 
+        // ── Operator — Cross: intake in ───────────────────────────────────────
+        operatorController.L2().whileTrue(
+            new StartEndCommand(
+                intakeSubsystem::runRollerIntake,
+                intakeSubsystem::stopRoller,
+                intakeSubsystem));
 
-    // L2 held -> deploy arm + rollers OUT (eject)
-    operatorController.L2().whileTrue(
-        new StartEndCommand(
-            () -> { intakeSubsystem.deploy(); intakeSubsystem.runRollerOuttake(); },
-            ()  -> intakeSubsystem.stopRoller(),
-            intakeSubsystem));
+        // ── Operator — R1: feeder (fire) ──────────────────────────────────────
+        operatorController.R1().whileTrue(
+            new StartEndCommand(
+                feederSubsystem::runFeeder,
+                feederSubsystem::stopFeeder,
+                feederSubsystem));
 
-    // Circle -> retract / stow arm
-    operatorController.circle().onTrue(
-        new InstantCommand(intakeSubsystem::retract, intakeSubsystem));
+        // ── Operator — L1: feeder reverse (unjam) ────────────────────────────
+        operatorController.triangle().whileTrue(
+            new StartEndCommand(
+                feederSubsystem::reverseFeeder,
+                feederSubsystem::stopFeeder,
+                feederSubsystem));
 
-    // ── Operator — Feeder ─────────────────────────────────────────────────
-    operatorController.R1().whileTrue(
-        new StartEndCommand(
-            feederSubsystem::runFeeder,
-            feederSubsystem::stopFeeder,
-            feederSubsystem));
+        // ── Operator — R1: reverse shooter (unjam) ───────────────────────────
+        operatorController.cross().onTrue(
+            new RunCommand(shooterSubsystem::reverse, shooterSubsystem)
+        ).onFalse(
+            new InstantCommand(shooterSubsystem::stop, shooterSubsystem)
+        );
 
-    operatorController.L1().whileTrue(
-        new StartEndCommand(
-            feederSubsystem::reverseFeeder,
-            feederSubsystem::stopFeeder,
-            feederSubsystem));
+        // operatorController.circle().onTrue(
+        //     new RunCommand(shooterSubsystem::column, shooterSubsystem)
+        // ).onFalse(
+        //     new InstantCommand(shooterSubsystem::stop1, shooterSubsystem)
+        // );
 
-    // ── Operator — Shooter ────────────────────────────────────────────────
-    operatorController.triangle().whileTrue(
-        new StartEndCommand(
-            shooterSubsystem::spinUp,
-            shooterSubsystem::stop,
-            shooterSubsystem));
+        // operatorController.R3().whileTrue(
+        // new ArcShootCommand(limelightSubsystem, driveSubsystem,
+        //                   shooterSubsystem, operatorController));
+        // operatorController.R2().whileTrue(
+        // new LUTAutoShootCommand(shooterSubsystem));
 
-    operatorController.square().whileTrue(
-        new StartEndCommand(
-            shooterSubsystem::reverse,
-            shooterSubsystem::stop,
-            shooterSubsystem));
-  
   }
 
 
