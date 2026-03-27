@@ -100,53 +100,11 @@ public static final double WHEEL_LOCK_TIME = 100; // seconds
         }
     }
 
-    public static final class LimelightConstants {
-
-        // ─── Network ──────────────────────────────────────────────────────────
-        public static final String LIMELIGHT_NAME    = "limelight"; // match your LL web UI hostname
-        public static final int    APRILTAG_PIPELINE = 0;           // pipeline index for April Tag mode
-
-        // ─── Hub April Tag IDs ────────────────────────────────────────────────
-        public static final int[] HUB_TAG_IDS = { 2, 9, 10, 11 };
-
-        // ─── Hub Position (field-relative, WPILib Blue origin) ────────────────
-        // Source: -120.236220 in, 22.950620 in, 0.375000 in
-        public static final double HUB_X_METERS = -3.0540;
-        public static final double HUB_Y_METERS =  0.5829;
-        public static final double HUB_Z_METERS =  0.0095;
-
-        // ─── Arc Zone ─────────────────────────────────────────────────────────
-        // Robot must be inside this radius AND holding the button to auto-align
-        public static final double ARC_RADIUS_METERS = 3.0;
-
-        // ─── Camera Mounting (Limelight 4) ────────────────────────────────────
-        // TODO: measure both values on your robot
-        public static final double CAMERA_HEIGHT_METERS   = 0.50;  // lens height from floor (m)
-        public static final double CAMERA_MOUNT_ANGLE_DEG = 20.0;  // upward tilt angle (deg)
-
-        // ─── Tag Height ───────────────────────────────────────────────────────
-        // 2025 Reefscape reef tags (9-11): centre at 29.875 in = 0.759 m
-        public static final double TAG_HEIGHT_METERS = 0.759; // TODO: verify for your tags
-
-        // ─── Alignment Target ─────────────────────────────────────────────────
-        public static final double TARGET_DISTANCE_METERS = 1.0; // 1 m from tag face
-
-        // ─── Rotation PID  (tx degrees → rad/s) ──────────────────────────────
-        public static final double ALIGN_ROT_kP            = 0.04;
-        public static final double ALIGN_ROT_kI            = 0.0;
-        public static final double ALIGN_ROT_kD            = 0.002;
-        public static final double ALIGN_ROT_TOLERANCE_DEG = 1.5;
-        public static final double ALIGN_MAX_ROT_SPEED     = 1.5;  // rad/s
-
-        // ─── Distance PID  (metres error → m/s) ──────────────────────────────
-        public static final double ALIGN_DIST_kP          = 1.2;
-        public static final double ALIGN_DIST_kI          = 0.0;
-        public static final double ALIGN_DIST_kD          = 0.05;
-        public static final double ALIGN_DIST_TOLERANCE_M = 0.05; // ±5 cm
-        public static final double ALIGN_MAX_FWD_SPEED    = 1.5;  // m/s
-
-        // ─── Settle ───────────────────────────────────────────────────────────
-        // Both errors must stay in-tolerance for this many consecutive 20 ms loops
-        public static final int ALIGN_SETTLE_LOOPS = 10; // = 200 ms
+    public static class CV {
+        public static final double kp = 3;
+        public static final double kd = 2;
+        public static final double secondaryKp = 1.3;
+        public static final double secondaryKd = 0.2;
+        public static final double MaxSpeed = 0.5;
     }
 }

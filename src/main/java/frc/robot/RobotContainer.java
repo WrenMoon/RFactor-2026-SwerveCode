@@ -29,6 +29,7 @@ import javax.print.attribute.standard.PageRanges;
 
 import com.pathplanner.lib.auto.NamedCommands;
 
+import frc.robot.Commands.gridSnap;
 import frc.robot.Subsystems.*;
 
 public class RobotContainer {
@@ -69,6 +70,7 @@ public class RobotContainer {
     driverController.povDown().whileTrue(swerve.driveCommand(() -> -0.1,() -> 0, () -> 0,false, false));
     driverController.povLeft().whileTrue(swerve.driveCommand(() -> 0,() -> 0.1, () -> 0,false, false));
     driverController.povRight().whileTrue(swerve.driveCommand(() -> 0,() -> -0.1, () -> 0,false, false));
+    driverController.button(1).whileTrue(new gridSnap(swerve, 0, 0));
     
 
     // ── Operator — Intake ─────────────────────────────────────────────────
