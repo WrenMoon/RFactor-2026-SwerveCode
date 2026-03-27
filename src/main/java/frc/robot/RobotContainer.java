@@ -46,14 +46,14 @@ public class RobotContainer {
 
 
   public RobotContainer() {
-
+ 
     configureBindings();
 
      //Default Swerve Command to drive with 3 axis on PS5 Controller
      Command driveSwerve = swerve.driveCommand(
       () -> MathUtil.applyDeadband((-driverController.getLeftY() * (((driverController.getR2Axis()+ 1)/2) + 3)/4) * Math.max(1 - ((driverController.getL2Axis()+ 1)/2), 0.3), Constants.ControllerDeadband),
       () -> MathUtil.applyDeadband((-driverController.getLeftX() * (((driverController.getR2Axis()+ 1)/2) + 3)/4) * Math.max(1 - ((driverController.getL2Axis()+ 1)/2), 0.3), Constants.ControllerDeadband),
-      () -> MathUtil.applyDeadband((-driverController.getRightX()) * Math.max(1 - ((driverController.getL2Axis()+ 1)/2), 0.3), Constants.ControllerDeadband), false, true); //Control heading with right joystick
+      () -> MathUtil.applyDeadband((-driverController.getRightX()), Constants.ControllerDeadband), false, true); //Control heading with right joystick
 
     swerve.setDefaultCommand(driveSwerve);
   }
