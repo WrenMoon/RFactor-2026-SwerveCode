@@ -72,6 +72,8 @@ public class alignPose extends Command {
             translationY = -Constants.CV.MaxSpeed;
         }
 
+        
+
 
         if (Constants.smartEnable){
             SmartDashboard.putNumber("Pose Align/TranslationX", translationX);
@@ -80,9 +82,11 @@ public class alignPose extends Command {
             SmartDashboard.putNumber("Pose Align/Error Y", yPID.getError());
         }
 
-        swerve.driveHeading(translationX, translationY,0, 0);
+        swerve.driveHeading(translationX, translationY, HeadingX, HeadingY);
 
-        if((xPID.atSetpoint() && yPID.atSetpoint())){
+        boolean reachedHeading = Math.abs(Math.atan2(HeadingY, HeadingX) - swerve.getHeading().getRadians()) < 0.1;
+
+        if((xPID.atSetpoint() && yPID.atSetpoint() && reachedHeading)){
             endLoop = true;
             SmartDashboard.putBoolean("Pose Align/Aligned", true);
         }

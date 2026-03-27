@@ -20,41 +20,16 @@ public class ShooterSubsystem extends SubsystemBase {
     private final TalonFX shooter3;
     private final TalonFX shooter4;
 
-    private final VelocityVoltage velocityReq = new VelocityVoltage(0).withSlot(0).withEnableFOC(true);
-    private final DutyCycleOut    stopReq     = new DutyCycleOut(0);
-
     public ShooterSubsystem() {
         shooter1 = new TalonFX(ShooterConstants.SHOOTER_1_ID);
         shooter2 = new TalonFX(ShooterConstants.SHOOTER_2_ID);
         shooter3 = new TalonFX(ShooterConstants.SHOOTER_3_ID);
         shooter4 = new TalonFX(ShooterConstants.SHOOTER_4_ID);
-        
 
-        configureMotor(shooter1, InvertedValue.CounterClockwise_Positive);
-        configureMotor(shooter2, InvertedValue.CounterClockwise_Positive);
-        configureMotor(shooter3, InvertedValue.CounterClockwise_Positive);
-
-        SmartDashboard.putNumber ("ShotVelocity", 0);
-    }
-
-    private void configureMotor(TalonFX motor, InvertedValue invert) {
-        TalonFXConfiguration cfg = new TalonFXConfiguration();
-
-        cfg.CurrentLimits.SupplyCurrentLimitEnable = true;
-        cfg.CurrentLimits.SupplyCurrentLimit       = ShooterConstants.SHOOTER_SUPPLY_LIMIT;
-        cfg.CurrentLimits.StatorCurrentLimitEnable = true;
-        cfg.CurrentLimits.StatorCurrentLimit       = ShooterConstants.SHOOTER_STATOR_LIMIT;
-
-        cfg.MotorOutput.NeutralMode = NeutralModeValue.Coast;
-        cfg.MotorOutput.Inverted    = invert;
-
-        cfg.Slot0.kP = ShooterConstants.SHOOTER_kP;
-        cfg.Slot0.kI = ShooterConstants.SHOOTER_kI;
-        cfg.Slot0.kD = ShooterConstants.SHOOTER_kD;
-        cfg.Slot0.kV = ShooterConstants.SHOOTER_kV;
-        cfg.Slot0.kS = ShooterConstants.SHOOTER_kS;
-
-        motor.getConfigurator().apply(cfg);
+        shooter1.setNeutralMode(NeutralModeValue.Coast);
+        shooter2.setNeutralMode(NeutralModeValue.Coast);
+        shooter3.setNeutralMode(NeutralModeValue.Coast);
+        shooter4.setNeutralMode(NeutralModeValue.Coast);
     }
 
     // ─── API ──────────────────────────────────────────────────────────────────
@@ -69,33 +44,33 @@ public class ShooterSubsystem extends SubsystemBase {
      * All 3 motors run at the same RPS.
      */
     public void setVelocity(double rps) {
-        shooter1.setControl(velocityReq.withVelocity(rps));
-        shooter2.setControl(velocityReq.withVelocity(-rps));
-        shooter3.setControl(velocityReq.withVelocity(rps));
+        shooter1.set(rps);
+        shooter2.set(-rps);
+        shooter3.set(rps);
         // shooter4.setControl(velocityReq.withVelocity(rps));
     }
     public void column(){
-        shooter4.setControl(velocityReq.withVelocity(-100));
+        shooter4.set(-0.8);
     }
 
     /** Reverse all motors (unjam). */
     public void reverse() {
         double target = ShooterConstants.REVERSE_VELOCITY_RPS;
-        shooter1.setControl(velocityReq.withVelocity(target));
-        shooter2.setControl(velocityReq.withVelocity(-target));
-        shooter3.setControl(velocityReq.withVelocity(target));
-        shooter4.setControl(velocityReq.withVelocity(-target));
+        shooter1.set(target);
+        shooter2.set(-target);
+        shooter3.set(target);
+        shooter4.set(-target);
     }
 
     /** Stop all motors. */
     public void stop() {
-        shooter1.setControl(stopReq);
-        shooter2.setControl(stopReq);
-        shooter3.setControl(stopReq);
-        shooter4.setControl(stopReq);
+        shooter1.set(0);
+        shooter2.set(0);
+        shooter3.set(0);
+        shooter4.set(0);
     }
     public void stop1(){
-        shooter4.setControl(stopReq);
+        shooter4.set(0);
     }
 
     /**
@@ -127,8 +102,5 @@ public class ShooterSubsystem extends SubsystemBase {
         SmartDashboard.putNumber ("Shooter/Velocity1",    shooter1.getVelocity().getValue().in(Units.RotationsPerSecond));
         SmartDashboard.putNumber ("Shooter/Velocity2",    shooter2.getVelocity().getValue().in(Units.RotationsPerSecond));
         SmartDashboard.putNumber ("Shooter/Velocity3",    shooter3.getVelocity().getValue().in(Units.RotationsPerSecond));
-        SmartDashboard.putNumber ("Shooter/Current1 (A)", shooter1.getSupplyCurrent().getValue().in(Units.Amps));
-        SmartDashboard.putNumber ("Shooter/Current2 (A)", shooter2.getSupplyCurrent().getValue().in(Units.Amps));
-        SmartDashboard.putNumber ("Shooter/Current3 (A)", shooter3.getSupplyCurrent().getValue().in(Units.Amps));
     }
 }

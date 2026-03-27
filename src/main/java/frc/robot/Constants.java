@@ -37,16 +37,12 @@ public static final double WHEEL_LOCK_TIME = 100; // seconds
         public static final double PIVOT_kD = 0.1;
         public static final double PIVOT_kG = 0.3;
 
-        public static final double PIVOT_DEPLOYED_ROT  = 10.0;
-        public static final double PIVOT_RETRACTED_ROT =  0.0;
         public static final double PIVOT_GEAR_RATIO    = 25.0;
 
         public static final double ROLLER_INTAKE_SPEED  =  0.6;
         public static final double ROLLER_OUTTAKE_SPEED = -0.6;
 
-        public static final double ROLLER_SUPPLY_LIMIT = 40;
-        public static final double PIVOT_SUPPLY_LIMIT  = 40;
-        public static final double PIVOT_STATOR_LIMIT  = 60;
+        public static final double PivotMaxSpeed = 0.3;
     }
 
     public static final class FeederConstants {
@@ -54,9 +50,6 @@ public static final double WHEEL_LOCK_TIME = 100; // seconds
 
         public static final double FEEDER_SPEED         = -0.2;
         public static final double FEEDER_REVERSE_SPEED = 0.2;
-
-        public static final double FEEDER_SUPPLY_LIMIT = 40;
-        public static final double FEEDER_STATOR_LIMIT = 60;
     }
 
     public static final class ShooterConstants {
@@ -106,5 +99,9 @@ public static final double WHEEL_LOCK_TIME = 100; // seconds
         public static final double secondaryKp = 1.3;
         public static final double secondaryKd = 0.2;
         public static final double MaxSpeed = 0.5;
+    }
+
+    public static class FieldPoses{
+        public static final Translation2d Hub = blueAlliance ? new Translation2d(0,0) : new Translation2d(0,0);
     }
 }

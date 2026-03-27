@@ -54,7 +54,7 @@ import swervelib.telemetry.SwerveDriveTelemetry;
 import swervelib.telemetry.SwerveDriveTelemetry.TelemetryVerbosity;
 
 public class SwerveSubsystem extends SubsystemBase {
-
+    public static Pose2d botPose;
     /**
      * Swerve drive object.
      */
@@ -118,12 +118,14 @@ public class SwerveSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
+        botPose = getPose();
+
         if (Constants.VisionOdometry){ 
 
             Pigeon2 imu = new Pigeon2(19);
 
-            LimelightHelpers.SetRobotOrientation("limelight", imu.getRotation2d().getDegrees(),
-                    0, 0, 0, 0, 0);
+            LimelightHelpers.SetRobotOrientation("limelight", imu.getYaw().getValueAsDouble(),
+                    0, imu.getPitch().getValueAsDouble(), 0, imu.getRoll().getValueAsDouble(), 0);
 
             LimelightHelpers.PoseEstimate megaTagPose = LimelightHelpers
                     .getBotPoseEstimate_wpiBlue_MegaTag2("limelight");
@@ -385,7 +387,7 @@ public class SwerveSubsystem extends SubsystemBase {
             swerveDrive.drive(SwerveMath.scaleTranslation(new Translation2d(
                     translationX.getAsDouble() * swerveDrive.getMaximumChassisVelocity(),
                     translationY.getAsDouble() * swerveDrive.getMaximumChassisVelocity()), 0.8),
-                    (angularRotationX.getAsDouble()) * swerveDrive.getMaximumChassisAngularVelocity(),
+                    Math.pow(angularRotationX.getAsDouble(), 3) * swerveDrive.getMaximumChassisAngularVelocity(),
                     fieldRelativity,
                     false);
         });

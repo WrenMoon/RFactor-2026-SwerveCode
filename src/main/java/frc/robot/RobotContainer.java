@@ -30,6 +30,7 @@ import javax.print.attribute.standard.PageRanges;
 import com.pathplanner.lib.auto.NamedCommands;
 
 import frc.robot.Commands.LUTAutoShootCommand;
+import frc.robot.Commands.alignPose;
 import frc.robot.Commands.gridSnap;
 import frc.robot.Subsystems.*;
 
@@ -57,6 +58,12 @@ public class RobotContainer {
       () -> MathUtil.applyDeadband((-driverController.getRightX()), Constants.ControllerDeadband), false, true); //Control heading with right joystick
 
     swerve.setDefaultCommand(driveSwerve);
+
+    Command movePivot = intakeSubsystem.setPivotMotor(
+      () -> operatorController.getLeftY()
+    );
+
+    intakeSubsystem.setDefaultCommand(movePivot);
   }
 
   /**
@@ -101,6 +108,7 @@ public class RobotContainer {
                 feederSubsystem::reverseFeeder,
                 feederSubsystem::stopFeeder,
                 feederSubsystem));
+              
 
         // ── Operator — R1: reverse shooter (unjam) ───────────────────────────
         operatorController.cross().onTrue(
@@ -108,6 +116,8 @@ public class RobotContainer {
         ).onFalse(
             new InstantCommand(shooterSubsystem::stop, shooterSubsystem)
         );
+
+        driverController.cross().whileTrue((new SequentialCommandGroup(new alignPose(swerve, swerve.getPose(), Constants.FieldPoses.Hub.getX() - swerve.getPose().getX(), Constants.FieldPoses.Hub.getY() - swerve.getPose().getY()), new LUTAutoShootCommand(shooterSubsystem))));
 
         // operatorController.circle().onTrue(
         //     new RunCommand(shooterSubsystem::column, shooterSubsystem)
