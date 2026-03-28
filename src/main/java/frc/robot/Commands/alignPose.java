@@ -27,7 +27,7 @@ public class alignPose extends Command {
      */
     public alignPose(SwerveSubsystem swerve, Pose2d targetPose, double HeadingX, double HeadingY) {
         this.swerve = swerve;
-        this.targetPose = targetPose;
+        // this.targetPose = targetPose;
         this.HeadingX = HeadingX;
         this.HeadingY = HeadingY;
 

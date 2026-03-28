@@ -5,6 +5,7 @@ import java.util.function.DoubleSupplier;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -39,6 +40,7 @@ public class PivotSubsystem extends SubsystemBase {
     public Command setPivotMotor(DoubleSupplier speed){
         return run(() -> {
             pivotMotor.set(speed.getAsDouble());    
+            SmartDashboard.putNumber("AAAA", speed.getAsDouble());
         });
     }
 
@@ -60,6 +62,7 @@ public class PivotSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
+
 
         // Smartdashboard for debugging
         if (Constants.smartEnable){

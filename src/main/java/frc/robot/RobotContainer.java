@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
+import edu.wpi.first.wpilibj2.command.RepeatCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 
 import java.io.File;
@@ -83,7 +84,7 @@ public class RobotContainer {
     driverController.povLeft().whileTrue(swerve.driveCommand(() -> 0,() -> Constants.povSpeed, () -> 0,false, true));
     driverController.povRight().whileTrue(swerve.driveCommand(() -> 0,() -> -Constants.povSpeed, () -> 0,false, false));
     driverController.L1().onTrue(new gridSnap(swerve, driverController));
-    driverController.cross().whileTrue(new alignPose(swerve, swerve.getPose(), Constants.FieldPoses.Hub.getX() - swerve.getPose().getX(), Constants.FieldPoses.Hub.getY() - swerve.getPose().getY()));
+    driverController.cross().whileTrue(swerve.driveCommand(() -> 0, () -> 0, () -> Constants.FieldPoses.Hub.getY() - swerve.getPose().getY(), ()-> Constants.FieldPoses.Hub.getX() - swerve.getPose().getX()));
     // driverController.cross().whileTrue((new SequentialCommandGroup(new alignPose(swerve, swerve.getPose(), Constants.FieldPoses.Hub.getX() - swerve.getPose().getX(), Constants.FieldPoses.Hub.getY() - swerve.getPose().getY()), new LUTAutoShootCommand(shooterSubsystem))));
   
     // Operator bindings
@@ -95,14 +96,17 @@ public class RobotContainer {
     operatorController.L2().whileTrue(new ParallelCommandGroup(new StartEndCommand(
           intakeSubsystem::runRollerIntake,
           intakeSubsystem::stopRoller,
-          intakeSubsystem), new pivotPosCmd(pivotSubsystem, 80, false)));
+          intakeSubsystem), 
+          new RepeatCommand( new SequentialCommandGroup(
+          new pivotPosCmd(pivotSubsystem, 75, false),
+          new pivotPosCmd(pivotSubsystem, 85, false)))));
     
-    operatorController.R1().whileTrue(new StartEndCommand(
+    operatorController.triangle().whileTrue(new StartEndCommand(
           feederSubsystem::runFeeder,
           feederSubsystem::stopFeeder,
           feederSubsystem));
 
-    operatorController.triangle().whileTrue(new StartEndCommand(
+    operatorController.R1().whileTrue(new StartEndCommand(
           feederSubsystem::reverseFeeder,
           feederSubsystem::stopFeeder,
           feederSubsystem));
