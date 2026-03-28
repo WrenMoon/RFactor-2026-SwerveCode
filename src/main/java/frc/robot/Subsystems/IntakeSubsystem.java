@@ -27,17 +27,11 @@ public class IntakeSubsystem extends SubsystemBase {
 
     // ─── Hardware ─────────────────────────────────────────────────────────────
     private final TalonFX rollerMotor;
-    private final TalonFX pivotMotor;
 
     public IntakeSubsystem() {
         rollerMotor = new TalonFX(IntakeConstants.INTAKE_ROLLER_ID);
-        pivotMotor  = new TalonFX(IntakeConstants.INTAKE_PIVOT_ID);
-
-        // Seed pivot position to 0 on startup (assumes arm starts retracted)
-        pivotMotor.setPosition(0);
 
         rollerMotor.setNeutralMode(NeutralModeValue.Coast);
-        pivotMotor.setNeutralMode(NeutralModeValue.Brake);
     }
 
     // ─── Roller API ───────────────────────────────────────────────────────────
@@ -57,35 +51,11 @@ public class IntakeSubsystem extends SubsystemBase {
         rollerMotor.set(0);
     }
 
-    public void setPivotMotor(double speed) {
-        pivotMotor.set(speed);
-    }
-
-    public Command setPivotMotor(DoubleSupplier speed){
-        return run(() -> {
-            pivotMotor.set(speed.getAsDouble());    
-        });
-    }
-
-    public void setPivotMotorFeedForward(double speed){
-        pivotMotor.set(speed + Constants.IntakeConstants.PIVOT_kG * Math.cos(getPivotAngle()));
-    }
-
-    public double getRawPivotPosition() {
-        return pivotMotor.getPosition().getValueAsDouble();
-    }
-
-    public double getPivotAngle() {
-        return getRawPivotPosition() * Constants.IntakeConstants.PIVOT_GEAR_RATIO;
-    }
 
     @Override
     public void periodic() {
         if (Constants.smartEnable){
-            SmartDashboard.putNumber("Intake/RawPivotPosition", getRawPivotPosition());
-            SmartDashboard.putNumber("Intake/PivotAngle", getPivotAngle());
             SmartDashboard.putNumber("Intake/RollerSpeed", rollerMotor.getVelocity().getValueAsDouble());
-            SmartDashboard.putNumber("Intake/PivotSpeed", pivotMotor.getVelocity().getValueAsDouble());
         }
     }
 }

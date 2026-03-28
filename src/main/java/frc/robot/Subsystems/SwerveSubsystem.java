@@ -387,7 +387,7 @@ public class SwerveSubsystem extends SubsystemBase {
             swerveDrive.drive(SwerveMath.scaleTranslation(new Translation2d(
                     translationX.getAsDouble() * swerveDrive.getMaximumChassisVelocity(),
                     translationY.getAsDouble() * swerveDrive.getMaximumChassisVelocity()), 0.8),
-                    Math.pow(angularRotationX.getAsDouble(), 3) * swerveDrive.getMaximumChassisAngularVelocity(),
+                    angularRotationX.getAsDouble() * swerveDrive.getMaximumChassisAngularVelocity(),
                     fieldRelativity,
                     false);
         });
@@ -407,7 +407,7 @@ public class SwerveSubsystem extends SubsystemBase {
      */
     public Command driveCommand(DoubleSupplier translationX, DoubleSupplier translationY, DoubleSupplier headingX,
             DoubleSupplier headingY) {
-        // swerveDrive.setHeadingCorrection(true); // Normally you would want heading
+        swerveDrive.setHeadingCorrection(true); // Normally you would want heading
         // correction for this kind of control.
         return run(() -> {
 

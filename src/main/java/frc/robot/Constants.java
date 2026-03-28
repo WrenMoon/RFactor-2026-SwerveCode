@@ -21,8 +21,9 @@ public class Constants {
   public static final double LOOP_TIME = 0.13; // s, 20ms + 110ms sprk max velocity lag
   public static final boolean smartEnable = true;
   public static final double ControllerDeadband = 0.05;
-  public static final boolean VisionOdometry = false;
+  public static final boolean VisionOdometry = true;
   public static double MAX_SPEED = 5;
+  public static double povSpeed = 0.5;
 
   public static final class DrivebaseConstants {
 public static final double WHEEL_LOCK_TIME = 100; // seconds
@@ -32,17 +33,17 @@ public static final double WHEEL_LOCK_TIME = 100; // seconds
         public static final int INTAKE_ROLLER_ID = 26;
         public static final int INTAKE_PIVOT_ID  = 25;
 
-        public static final double PIVOT_kP = 2.0;
+        public static final double PIVOT_kP = 0.01;
         public static final double PIVOT_kI = 0.0;
-        public static final double PIVOT_kD = 0.1;
-        public static final double PIVOT_kG = 0.3;
+        public static final double PIVOT_kD = 0;
+        public static final double PIVOT_kG = 0.04;
 
-        public static final double PIVOT_GEAR_RATIO    = 25.0;
+        public static final double PIVOT_GEAR_RATIO    = 400.0;
 
         public static final double ROLLER_INTAKE_SPEED  =  0.6;
         public static final double ROLLER_OUTTAKE_SPEED = -0.6;
 
-        public static final double PivotMaxSpeed = 0.3;
+        public static final double PivotMaxSpeed = 0.2;
     }
 
     public static final class FeederConstants {

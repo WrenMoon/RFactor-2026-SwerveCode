@@ -32,6 +32,7 @@ import com.pathplanner.lib.auto.NamedCommands;
 import frc.robot.Commands.LUTAutoShootCommand;
 import frc.robot.Commands.alignPose;
 import frc.robot.Commands.gridSnap;
+import frc.robot.Commands.pivotPosCmd;
 import frc.robot.Subsystems.*;
 
 public class RobotContainer {
@@ -40,6 +41,7 @@ public class RobotContainer {
   private final SwerveSubsystem swerve = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
       "JsonConstants"));
   private final IntakeSubsystem  intakeSubsystem  = new IntakeSubsystem();
+  private final PivotSubsystem pivotSubsystem  = new PivotSubsystem();
   private final FeederSubsystem  feederSubsystem  = new FeederSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   
@@ -56,14 +58,14 @@ public class RobotContainer {
       () -> MathUtil.applyDeadband((-driverController.getLeftY() * (((driverController.getR2Axis()+ 1)/2) + 3)/4) * Math.max(1 - ((driverController.getL2Axis()+ 1)/2), 0.3), Constants.ControllerDeadband),
       () -> MathUtil.applyDeadband((-driverController.getLeftX() * (((driverController.getR2Axis()+ 1)/2) + 3)/4) * Math.max(1 - ((driverController.getL2Axis()+ 1)/2), 0.3), Constants.ControllerDeadband),
       () -> MathUtil.applyDeadband((-driverController.getRightX()), Constants.ControllerDeadband), false, true); //Control heading with right joystick
+        // Command driveSwerve = swerve.driveCommand(
+        //   () -> MathUtil.applyDeadband((-driverController.getLeftY() * (((driverController.getR2Axis()+ 1)/2) + 3)/4) * Math.max(1 - ((driverController.getL2Axis()+ 1)/2), 0.3), Constants.ControllerDeadband),
+        //   () -> MathUtil.applyDeadband((-driverController.getLeftX() * (((driverController.getR2Axis()+ 1)/2) + 3)/4) * Math.max(1 - ((driverController.getL2Axis()+ 1)/2), 0.3), Constants.ControllerDeadband),
+        //   () -> MathUtil.applyDeadband((-driverController.getRightX()), Constants.ControllerDeadband),
+        //   () -> MathUtil.applyDeadband((-driverController.getRightY()), Constants.ControllerDeadband)); //Control heading with right joystick
+    
 
     swerve.setDefaultCommand(driveSwerve);
-
-    Command movePivot = intakeSubsystem.setPivotMotor(
-      () -> operatorController.getLeftY()
-    );
-
-    intakeSubsystem.setDefaultCommand(movePivot);
   }
 
   /**
@@ -73,12 +75,12 @@ public class RobotContainer {
 
     driverController.button(10).onTrue(Commands.runOnce(swerve::zeroGyro));
 
-    driverController.touchpad().whileTrue(swerve.driveCommand(() -> 0,() -> 0, () -> 0,false, false));
-    driverController.povUp().whileTrue(swerve.driveCommand(() -> 0.1,() -> 0, () -> 0,false, false));
-    driverController.povDown().whileTrue(swerve.driveCommand(() -> -0.1,() -> 0, () -> 0,false, false));
-    driverController.povLeft().whileTrue(swerve.driveCommand(() -> 0,() -> 0.1, () -> 0,false, false));
-    driverController.povRight().whileTrue(swerve.driveCommand(() -> 0,() -> -0.1, () -> 0,false, false));
-    driverController.button(1).whileTrue(new gridSnap(swerve, 0, 0));
+    driverController.touchpad().whileTrue(swerve.driveCommand(() -> 0,() -> 0, () -> 0,false, true));
+    driverController.povUp().whileTrue(swerve.driveCommand(() -> Constants.povSpeed,() -> 0, () -> 0,false, true));
+    driverController.povDown().whileTrue(swerve.driveCommand(() -> -Constants.povSpeed,() -> 0, () -> 0,false, true));
+    driverController.povLeft().whileTrue(swerve.driveCommand(() -> 0,() -> Constants.povSpeed, () -> 0,false, true));
+    driverController.povRight().whileTrue(swerve.driveCommand(() -> 0,() -> -Constants.povSpeed, () -> 0,false, false));
+    driverController.L1().onTrue(new gridSnap(swerve, driverController));
     
 
     // ── Operator — Square: intake outtake ─────────────────────────────────
@@ -89,12 +91,12 @@ public class RobotContainer {
                 intakeSubsystem));
 
         // ── Operator — Cross: intake in ───────────────────────────────────────
-        operatorController.L2().whileTrue(
+        operatorController.L2().whileTrue(new ParallelCommandGroup(
             new StartEndCommand(
                 intakeSubsystem::runRollerIntake,
                 intakeSubsystem::stopRoller,
-                intakeSubsystem));
-
+                intakeSubsystem), new pivotPosCmd(pivotSubsystem, 90, false)));
+        
         // ── Operator — R1: feeder (fire) ──────────────────────────────────────
         operatorController.R1().whileTrue(
             new StartEndCommand(
@@ -111,13 +113,16 @@ public class RobotContainer {
               
 
         // ── Operator — R1: reverse shooter (unjam) ───────────────────────────
-        operatorController.cross().onTrue(
+        operatorController.R1().onTrue(
             new RunCommand(shooterSubsystem::reverse, shooterSubsystem)
         ).onFalse(
             new InstantCommand(shooterSubsystem::stop, shooterSubsystem)
         );
 
-        driverController.cross().whileTrue((new SequentialCommandGroup(new alignPose(swerve, swerve.getPose(), Constants.FieldPoses.Hub.getX() - swerve.getPose().getX(), Constants.FieldPoses.Hub.getY() - swerve.getPose().getY()), new LUTAutoShootCommand(shooterSubsystem))));
+        operatorController.povUp().whileTrue(new pivotPosCmd(pivotSubsystem, -20, true));
+        operatorController.povDown().whileTrue(new pivotPosCmd(pivotSubsystem, 90, true));
+
+        // driverController.cross().whileTrue((new SequentialCommandGroup(new alignPose(swerve, swerve.getPose(), Constants.FieldPoses.Hub.getX() - swerve.getPose().getX(), Constants.FieldPoses.Hub.getY() - swerve.getPose().getY()), new LUTAutoShootCommand(shooterSubsystem))));
 
         // operatorController.circle().onTrue(
         //     new RunCommand(shooterSubsystem::column, shooterSubsystem)
