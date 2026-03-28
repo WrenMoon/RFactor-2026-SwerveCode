@@ -1,7 +1,6 @@
 package frc.robot.Commands;
 
 import frc.robot.Constants;
-import frc.robot.Subsystems.IntakeSubsystem;
 import frc.robot.Subsystems.PivotSubsystem;
 import edu.wpi.first.math.controller.PIDController;
 
@@ -16,10 +15,9 @@ public class pivotPosCmd extends Command {
     private boolean endLoop = false;
 
     /**
-     * A command to move the intake to an encoder setpoint using PID Feedback and
-     * Gravity compensation feedforward.
+     * A command to move the pivot to an angle setpoint using PID Feedback.
      * 
-     * @param intake        the intake subsystem to move
+     * @param pivot        the pivot subsystem to move
      * @param targetPose the target pose in dergees to move to
      * @param holdPID    whether or not to hold the PID loop after acceptable error
      *                   is achieved
@@ -43,7 +41,6 @@ public class pivotPosCmd extends Command {
     public void execute() {
 
         double speed = -PIDintake.calculate(pivot.getPivotAngle()); // PID Correction value
-        // speed = speed + Constants.IntakeConstants.PIVOT_kG * Math.sin(Math.toRadians(intake.getPivotAngle())); // Feedforward Gravity compensation
 
         speed = Math.min(Math.max(speed, -Constants.IntakeConstants.PivotMaxSpeed), Constants.IntakeConstants.PivotMaxSpeed); // Applying Speed Limits
 

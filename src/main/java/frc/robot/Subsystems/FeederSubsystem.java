@@ -12,43 +12,45 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Constants.FeederConstants;
 
-/**
- * Feeder subsystem:
- *   CAN 26 — Feeds game piece from intake toward the shooter column.
- */
+
 public class FeederSubsystem extends SubsystemBase {
 
     private final TalonFX feederMotor;
 
+    /**
+     * The subsytem for the feeder mechanism of the robot
+     */
     public FeederSubsystem() {
         feederMotor = new TalonFX(FeederConstants.FEEDER_ID);
         feederMotor.setNeutralMode(NeutralModeValue.Coast);
     }
 
-
-    // ─── API ──────────────────────────────────────────────────────────────────
-
-    /** Run feeder forward to push game piece toward shooter. */
+    /**
+     * Runs the feeder forward at its fixed speed
+     */
     public void runFeeder() {
         feederMotor.set(FeederConstants.FEEDER_SPEED);
     }
 
-    /** Run feeder in reverse to unjam. */
+    /**
+     * Runs the feeder backwards at its fixed speed
+     */
     public void reverseFeeder() {
         feederMotor.set(FeederConstants.FEEDER_REVERSE_SPEED);
     }
 
-    /** Stop feeder. */
+    /* Stops the feeder */
     public void stopFeeder() {
         feederMotor.set(0);
     }
 
-    // ─── Periodic ─────────────────────────────────────────────────────────────
 
     @Override
     public void periodic() {
-     if(Constants.smartEnable){
-        SmartDashboard.putNumber("FeederSpeed", feederMotor.getVelocity().getValueAsDouble());
-     }
+        
+        // Smartdashboard for debugging
+        if(Constants.smartEnable){
+            SmartDashboard.putNumber("FeederSpeed", feederMotor.getVelocity().getValueAsDouble());
+        }
     }
 }

@@ -1,19 +1,12 @@
 package frc.robot.Commands;
 
 import frc.robot.Constants;
-import frc.robot.LimelightHelpers;
 import frc.robot.Subsystems.SwerveSubsystem;
-
-import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.RobotContainer;
-
 
 public class alignPose extends Command {
     private final SwerveSubsystem swerve;
@@ -24,6 +17,14 @@ public class alignPose extends Command {
     private Pose2d targetPose;
     boolean endLoop = false;
 
+    /**
+     * A command to precisely align the swerve to a provided pose and heading using PID
+     * 
+     * @param swerve     the swerve subsystem to move
+     * @param targetPose the target pose2d to align to
+     * @param HeadingX   the horizontal heading vector
+     * @param HeadingY   the vertical heading vector
+     */
     public alignPose(SwerveSubsystem swerve, Pose2d targetPose, double HeadingX, double HeadingY) {
         this.swerve = swerve;
         this.targetPose = targetPose;
@@ -37,10 +38,13 @@ public class alignPose extends Command {
 
     @Override
     public void initialize() {
+
+        //Configure PID
         xPID.setSetpoint(targetPose.getX());
         yPID.setSetpoint(targetPose.getY());
         xPID.setTolerance(0.007);
         yPID.setTolerance(0.007);
+
         boolean endLoop = false;
     }
 
@@ -50,16 +54,17 @@ public class alignPose extends Command {
         double translationX = xPID.calculate(swerve.getPose().getX());
         double translationY = yPID.calculate(swerve.getPose().getY());
 
+
+        //secondary PID for finer adjustment less than 10cm
         if(xPID.getError() < 0.1){
             xPID.setPID(Constants.CV.secondaryKp,0,Constants.CV.secondaryKd);
         }
-
         if(yPID.getError() < 0.1){
             yPID.setPID(Constants.CV.secondaryKp,0,Constants.CV.secondaryKd);
         }
 
 
-
+        //Apply speed limits
         if(translationX > Constants.CV.MaxSpeed){
             translationX = Constants.CV.MaxSpeed;
         } else if (translationX < -Constants.CV.MaxSpeed){
@@ -74,7 +79,7 @@ public class alignPose extends Command {
 
         
 
-
+        // Smartdashboard for debugging
         if (Constants.smartEnable){
             SmartDashboard.putNumber("Pose Align/TranslationX", translationX);
             SmartDashboard.putNumber("Pose Align/TranslationY", translationY);
@@ -86,6 +91,7 @@ public class alignPose extends Command {
 
         boolean reachedHeading = Math.abs(Math.atan2(HeadingY, HeadingX) - swerve.getHeading().getRadians()) < 0.1;
 
+        // escape condition
         if((xPID.atSetpoint() && yPID.atSetpoint() && reachedHeading)){
             endLoop = true;
             SmartDashboard.putBoolean("Pose Align/Aligned", true);
