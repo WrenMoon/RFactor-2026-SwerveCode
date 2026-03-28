@@ -79,12 +79,14 @@ public class Constants {
             new InterpolatingDoubleTreeMap();
 
         static {
-            SHOOTER_MAP.put(0.0, 40.0);
-            SHOOTER_MAP.put(1.18, 54.5);
-            SHOOTER_MAP.put(1.39, 54.0);
-            SHOOTER_MAP.put(1.63, 56.5);
-            SHOOTER_MAP.put(2.44, 65.0);
-            SHOOTER_MAP.put(3.27, 69.89);
+            SHOOTER_MAP.put(0.0, 45.0);
+            SHOOTER_MAP.put(1.75, 55.0);
+            SHOOTER_MAP.put(1.95, 57.0);
+            SHOOTER_MAP.put(2.5, 60.0);
+            SHOOTER_MAP.put(3.0, 63.0);
+            SHOOTER_MAP.put(3.25, 66.0);
+            SHOOTER_MAP.put(3.5, 67.0);
+            SHOOTER_MAP.put(4.0, 70.0);
             SHOOTER_MAP.put(200.0,100.0);
         }
     }

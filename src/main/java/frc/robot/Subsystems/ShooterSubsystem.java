@@ -139,10 +139,10 @@ public class ShooterSubsystem extends SubsystemBase {
         double v1  = Math.abs(shooter1.getVelocity().getValue().in(Units.RotationsPerSecond));
         double v2  = Math.abs(shooter2.getVelocity().getValue().in(Units.RotationsPerSecond));
         double v3  = Math.abs(shooter3.getVelocity().getValue().in(Units.RotationsPerSecond));
-        return (Math.abs(v1 - targetRPS) < tol);
-        // return Math.abs(v1 - targetRPS) < tol
-        //     && Math.abs(v2 - targetRPS) < tol
-        //     && Math.abs(v3 - targetRPS) < tol;
+        // return (Math.abs(v1 - targetRPS) < tol);
+        return Math.abs(v1 - targetRPS) < tol
+            && Math.abs(v2 - targetRPS) < tol
+            && Math.abs(v3 - targetRPS) < tol;
     }
 
     @Override

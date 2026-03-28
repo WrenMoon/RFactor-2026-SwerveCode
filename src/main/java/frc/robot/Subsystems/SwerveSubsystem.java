@@ -39,7 +39,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 import org.json.simple.parser.ParseException;
@@ -147,15 +146,11 @@ public class SwerveSubsystem extends SubsystemBase {
                     SmartDashboard.putNumber("Vision Odometry/Pose Y:", megaTagPose.pose.getY());
                     SmartDashboard.putNumber("Vision Odometry/Pose Heading:", megaTagPose.pose.getRotation().getDegrees());
                     SmartDashboard.putNumber("Vision Odometry/MegaTagCount", megaTagPose.tagCount);
+                    SmartDashboard.putNumber("Vision Odometry/Yaw", imu.getYaw().getValueAsDouble());
+                    SmartDashboard.putNumber("Vision Odometry/Pitch", imu.getPitch().getValueAsDouble());
+                    SmartDashboard.putNumber("Vision Odometry/Roll", imu.getRoll().getValueAsDouble());
                 }
 
-                if (Constants.smartEnable){
-                    SmartDashboard.putBoolean("Vision Odometry/Enabled", false);
-                }
-        }
-
-        if(Constants.smartEnable){
-            SmartDashboard.putNumber("Vision Odometry/NavX Rate", imu.getRotation2d().getDegrees());
         }
         }
     }
