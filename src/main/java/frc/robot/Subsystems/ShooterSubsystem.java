@@ -1,5 +1,7 @@
 package frc.robot.Subsystems;
 
+import org.littletonrobotics.junction.networktables.LoggedNetworkNumber;
+
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.controls.VelocityVoltage;
@@ -9,6 +11,7 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.units.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Constants.ShooterConstants;
@@ -19,6 +22,10 @@ public class ShooterSubsystem extends SubsystemBase {
     private final TalonFX shooter2;
     private final TalonFX shooter3;
     private final TalonFX shooter4;
+    
+    // LoggedNetworkNumber ShooterkP = new LoggedNetworkNumber("/Tuning/ShooterkP", 0.55);
+    // LoggedNetworkNumber ShooterkI = new LoggedNetworkNumber("/Tuning/ShooterkI", 0.0);
+    // LoggedNetworkNumber ShooterkD = new LoggedNetworkNumber("/Tuning/ShooterkD", 0.01);
 
     private final VelocityVoltage velocityReq = new VelocityVoltage(0).withSlot(0).withEnableFOC(true);
     private final DutyCycleOut    stopReq     = new DutyCycleOut(0);
@@ -56,11 +63,15 @@ public class ShooterSubsystem extends SubsystemBase {
         cfg.MotorOutput.NeutralMode = NeutralModeValue.Coast;
         cfg.MotorOutput.Inverted    = invert;
 
-        cfg.Slot0.kP = ShooterConstants.SHOOTER_kP;
-        cfg.Slot0.kI = ShooterConstants.SHOOTER_kI;
-        cfg.Slot0.kD = ShooterConstants.SHOOTER_kD;
-        cfg.Slot0.kV = ShooterConstants.SHOOTER_kV;
-        cfg.Slot0.kS = ShooterConstants.SHOOTER_kS;
+        // cfg.Slot0.kP = ShooterkP.getAsDouble();
+        // cfg.Slot0.kI = ShooterkI.getAsDouble();
+        // cfg.Slot0.kD = ShooterkD.getAsDouble();
+
+        cfg.Slot0.kP = Constants.ShooterConstants.SHOOTER_kP;
+        cfg.Slot0.kI = Constants.ShooterConstants.SHOOTER_kI;
+        cfg.Slot0.kD = Constants.ShooterConstants.SHOOTER_kD;
+        cfg.Slot0.kV = Constants.ShooterConstants.SHOOTER_kV;
+        cfg.Slot0.kS = Constants.ShooterConstants.SHOOTER_kS;
 
         motor.getConfigurator().apply(cfg);
     }
@@ -103,6 +114,16 @@ public class ShooterSubsystem extends SubsystemBase {
         shooter4.setControl(stopReq);
     }
 
+
+    /**
+     * Reconfigure the shooter motors, to account for tuning changes
+     */
+    public void resetConfig(){
+        configureMotor(shooter1, InvertedValue.CounterClockwise_Positive);
+        configureMotor(shooter2, InvertedValue.CounterClockwise_Positive);
+        configureMotor(shooter3, InvertedValue.CounterClockwise_Positive);
+    }
+
     /**
      * Check if all motors are within tolerance of the fixed speed
      */
@@ -131,7 +152,7 @@ public class ShooterSubsystem extends SubsystemBase {
         if (Constants.smartEnable){
             SmartDashboard.putBoolean("Shooter/AtSpeed",      isAtSpeed());
             SmartDashboard.putNumber ("Shooter/Velocity1",    shooter1.getVelocity().getValue().in(Units.RotationsPerSecond));
-            SmartDashboard.putNumber ("Shooter/Velocity2",    shooter2.getVelocity().getValue().in(Units.RotationsPerSecond));
+            SmartDashboard.putNumber ("Shooter/Velocity2",    -shooter2.getVelocity().getValue().in(Units.RotationsPerSecond));
             SmartDashboard.putNumber ("Shooter/Velocity3",    shooter3.getVelocity().getValue().in(Units.RotationsPerSecond));
             SmartDashboard.putNumber ("Shooter/Current1 (A)", shooter1.getSupplyCurrent().getValue().in(Units.Amps));
             SmartDashboard.putNumber ("Shooter/Current2 (A)", shooter2.getSupplyCurrent().getValue().in(Units.Amps));

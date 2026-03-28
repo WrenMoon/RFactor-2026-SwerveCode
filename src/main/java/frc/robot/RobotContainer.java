@@ -122,6 +122,8 @@ public class RobotContainer {
     operatorController.povDown().onTrue(new pivotPosCmd(pivotSubsystem, 80, false));
 
     operatorController.R2().whileTrue(new LUTAutoShootCommand(shooterSubsystem));
+
+    operatorController.touchpad().onTrue(Commands.runOnce(shooterSubsystem::resetConfig));
   }
 
 

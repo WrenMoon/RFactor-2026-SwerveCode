@@ -56,8 +56,8 @@ public class Constants {
         public static final int SHOOTER_3_ID = 23;
         public static final int SHOOTER_4_ID = 24;
 
-        public static final double SHOOTER_kP = 0.55;
-        public static final double SHOOTER_kI = 0.0;
+        public static final double SHOOTER_kP = 0.22;
+        public static final double SHOOTER_kI = 0.0001;
         public static final double SHOOTER_kD = 0.01;
         public static final double SHOOTER_kV = 0.0957;
         public static final double SHOOTER_kS = 0.0;
