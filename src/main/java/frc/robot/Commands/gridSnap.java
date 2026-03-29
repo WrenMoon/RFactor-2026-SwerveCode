@@ -15,7 +15,7 @@ public class gridSnap extends Command {
     private Double Heading;
     private Double setpoint;
     private CommandPS5Controller driveController;
-    boolean endLoop = false;;
+    boolean endLoop;
 
     /**
      * A command to 'snap' the robot chasis to the neartest 45 degree heading, for crossing over the bump. Allows use of Dpad controls for the swerve during heading correction.
@@ -32,7 +32,7 @@ public class gridSnap extends Command {
 
     @Override
     public void initialize() {
-        boolean endLoop = false;
+        endLoop = false;
         Heading = swerve.getHeading().getDegrees();
     }
 

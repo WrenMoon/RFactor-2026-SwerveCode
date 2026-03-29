@@ -5,7 +5,6 @@ import org.littletonrobotics.junction.networktables.LoggedNetworkNumber;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
-import frc.robot.Constants.ShooterConstants;
 import frc.robot.Subsystems.FeederSubsystem;
 import frc.robot.Subsystems.ShooterSubsystem;
 import frc.robot.Subsystems.SwerveSubsystem;
@@ -15,6 +14,8 @@ public class LUTAutoShootCommand extends Command {
     private final ShooterSubsystem   shooter;
     private final FeederSubsystem   feeder;
     private double targetRPS;
+
+    // Tuning RPS from advantagescope
     LoggedNetworkNumber TargetRPS = new LoggedNetworkNumber("/Tuning/TargetRPS", 60);
 
     /**

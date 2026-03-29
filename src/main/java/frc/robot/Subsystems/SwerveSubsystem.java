@@ -5,8 +5,6 @@
 package frc.robot.Subsystems;
 
 import static edu.wpi.first.units.Units.Meter;
-
-import com.ctre.phoenix6.hardware.Pigeon2;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.commands.PathfindingCommand;
@@ -121,7 +119,6 @@ public class SwerveSubsystem extends SubsystemBase {
 
         if (Constants.VisionOdometry){ 
 
-            Pigeon2 imu = new Pigeon2(19);
 
             LimelightHelpers.SetRobotOrientation("limelight", swerveDrive.getOdometryHeading().getDegrees(),
                     0, 0, 0, 0, 0);
@@ -147,9 +144,6 @@ public class SwerveSubsystem extends SubsystemBase {
                     SmartDashboard.putNumber("Vision Odometry/Pose Heading:", megaTagPose.pose.getRotation().getDegrees());
                     SmartDashboard.putNumber("Vision Odometry/MegaTagCount", megaTagPose.tagCount);
                     SmartDashboard.putNumber("Vision Odometry/Swerve Heading", swerveDrive.getOdometryHeading().getDegrees());
-                    SmartDashboard.putNumber("Vision Odometry/Yaw", imu.getYaw().getValueAsDouble());
-                    SmartDashboard.putNumber("Vision Odometry/Pitch", imu.getPitch().getValueAsDouble());
-                    SmartDashboard.putNumber("Vision Odometry/Roll", imu.getRoll().getValueAsDouble());
                 }
 
         }

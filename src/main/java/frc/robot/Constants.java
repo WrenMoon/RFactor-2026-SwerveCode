@@ -1,9 +1,5 @@
 package frc.robot;
-
-import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
-import swervelib.math.Matter;
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.math.geometry.Translation2d;
 
 /**
@@ -12,19 +8,11 @@ import edu.wpi.first.math.geometry.Translation2d;
 public class Constants {
 
     public static final boolean blueAlliance = true;
-
-    public static final double ROBOT_MASS = 70;
-    public static final Matter CHASSIS = new Matter(new Translation3d(-0.2, 0, Units.inchesToMeters(2)), ROBOT_MASS);
-    public static final double LOOP_TIME = 0.13; // s, 20ms + 110ms sprk max velocity lag
     public static final boolean smartEnable = true;
     public static final double ControllerDeadband = 0.05;
     public static final boolean VisionOdometry = true;
     public static double MAX_SPEED = 5;
     public static double povSpeed = 0.5;
-
-    public static final class DrivebaseConstants {
-        public static final double WHEEL_LOCK_TIME = 100; // seconds
-    }
 
     public static final class IntakeConstants {
         public static final int INTAKE_ROLLER_ID = 26;
@@ -33,7 +21,6 @@ public class Constants {
         public static final double PIVOT_kP = 0.02;
         public static final double PIVOT_kI = 0.0;
         public static final double PIVOT_kD = 0;
-        public static final double PIVOT_kG = 0.04;
 
         public static final double PIVOT_GEAR_RATIO    = 400.0;
 
@@ -89,14 +76,6 @@ public class Constants {
             SHOOTER_MAP.put(4.0, 70.0);
             SHOOTER_MAP.put(200.0,100.0);
         }
-    }
-
-    public static class CV {
-        public static final double kp = 3;
-        public static final double kd = 2;
-        public static final double secondaryKp = 1.3;
-        public static final double secondaryKd = 0.2;
-        public static final double MaxSpeed = 0.5;
     }
 
     public static class FieldPoses{
