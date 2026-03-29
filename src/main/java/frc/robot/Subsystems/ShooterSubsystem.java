@@ -43,7 +43,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
         // configure motor feedforwards
         configureMotor(shooter1, InvertedValue.CounterClockwise_Positive);
-        configureMotor(shooter2, InvertedValue.CounterClockwise_Positive);
+        configureMotor(shooter2, InvertedValue.Clockwise_Positive);
         configureMotor(shooter3, InvertedValue.CounterClockwise_Positive);
     }
 
@@ -67,7 +67,6 @@ public class ShooterSubsystem extends SubsystemBase {
         cfg.Slot0.kI = ShooterkI.getAsDouble();
         cfg.Slot0.kD = ShooterkD.getAsDouble();
         cfg.Slot0.kV = ShooterkV.getAsDouble();
-
         // cfg.Slot0.kP = Constants.ShooterConstants.SHOOTER_kP;
         // cfg.Slot0.kI = Constants.ShooterConstants.SHOOTER_kI;
         // cfg.Slot0.kD = Constants.ShooterConstants.SHOOTER_kD;
@@ -88,7 +87,7 @@ public class ShooterSubsystem extends SubsystemBase {
      */
     public void setVelocity(double rps) {
         shooter1.setControl(velocityReq.withVelocity(rps));
-        shooter2.setControl(velocityReq.withVelocity(-rps));
+        shooter2.setControl(velocityReq.withVelocity(rps));
         shooter3.setControl(velocityReq.withVelocity(rps));
     }
     public void column(){
@@ -99,7 +98,7 @@ public class ShooterSubsystem extends SubsystemBase {
     public void reverse() {
         double target = ShooterConstants.REVERSE_VELOCITY_RPS;
         shooter1.setControl(velocityReq.withVelocity(target));
-        shooter2.setControl(velocityReq.withVelocity(-target));
+        shooter2.setControl(velocityReq.withVelocity(target));
         shooter3.setControl(velocityReq.withVelocity(target));
         shooter4.setControl(velocityReq.withVelocity(-target));
     }
@@ -121,7 +120,7 @@ public class ShooterSubsystem extends SubsystemBase {
      */
     public void resetConfig(){
         configureMotor(shooter1, InvertedValue.CounterClockwise_Positive);
-        configureMotor(shooter2, InvertedValue.CounterClockwise_Positive);
+        configureMotor(shooter2, InvertedValue.Clockwise_Positive);
         configureMotor(shooter3, InvertedValue.CounterClockwise_Positive);
     }
 
@@ -146,6 +145,8 @@ public class ShooterSubsystem extends SubsystemBase {
             && Math.abs(v3 - targetRPS) < tol;
     }
 
+    
+
     @Override
     public void periodic() {
 
@@ -153,7 +154,7 @@ public class ShooterSubsystem extends SubsystemBase {
         if (Constants.smartEnable){
             SmartDashboard.putBoolean("Shooter/AtSpeed",      isAtSpeed());
             SmartDashboard.putNumber ("Shooter/Velocity1",    shooter1.getVelocity().getValue().in(Units.RotationsPerSecond));
-            SmartDashboard.putNumber ("Shooter/Velocity2",    -shooter2.getVelocity().getValue().in(Units.RotationsPerSecond));
+            SmartDashboard.putNumber ("Shooter/Velocity2",    shooter2.getVelocity().getValue().in(Units.RotationsPerSecond));
             SmartDashboard.putNumber ("Shooter/Velocity3",    shooter3.getVelocity().getValue().in(Units.RotationsPerSecond));
             SmartDashboard.putNumber ("Shooter/Current1 (A)", shooter1.getSupplyCurrent().getValue().in(Units.Amps));
             SmartDashboard.putNumber ("Shooter/Current2 (A)", shooter2.getSupplyCurrent().getValue().in(Units.Amps));
