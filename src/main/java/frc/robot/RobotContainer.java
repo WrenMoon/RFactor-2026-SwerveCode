@@ -85,7 +85,7 @@ public class RobotContainer {
     driverController.povLeft().whileTrue(swerve.driveCommand(() -> 0,() -> Constants.povSpeed, () -> 0,false, true));
     driverController.povRight().whileTrue(swerve.driveCommand(() -> 0,() -> -Constants.povSpeed, () -> 0,false, false));
     driverController.L1().onTrue(new gridSnap(swerve, driverController));
-    driverController.cross().whileTrue(new ParallelCommandGroup(swerve.driveCommand(() -> 0, () -> 0, () -> Constants.FieldPoses.Hub.getY() - swerve.getPose().getY(), ()-> Constants.FieldPoses.Hub.getX() - swerve.getPose().getX()), new SequentialCommandGroup(new WaitCommand(1), new LUTAutoShootCommand(shooterSubsystem))));
+    driverController.cross().whileTrue(new ParallelCommandGroup(swerve.driveCommand(() -> 0, () -> 0, () -> Constants.FieldPoses.Hub.getY() - swerve.getPose().getY(), ()-> Constants.FieldPoses.Hub.getX() - swerve.getPose().getX()), new SequentialCommandGroup(new WaitCommand(1), new LUTAutoShootCommand(shooterSubsystem)), new StartEndCommand(feederSubsystem::runFeeder, feederSubsystem::stopFeeder ,feederSubsystem)));
     // driverController.cross().whileTrue((new SequentialCommandGroup(new alignPose(swerve, swerve.getPose(), Constants.FieldPoses.Hub.getX() - swerve.getPose().getX(), Constants.FieldPoses.Hub.getY() - swerve.getPose().getY()), new LUTAutoShootCommand(shooterSubsystem))));
   
     // Operator bindings
@@ -99,8 +99,8 @@ public class RobotContainer {
           intakeSubsystem::stopRoller,
           intakeSubsystem), 
           new RepeatCommand( new SequentialCommandGroup(
-          new pivotPosCmd(pivotSubsystem, 75, false),
-          new pivotPosCmd(pivotSubsystem, 85, false)))));
+          new pivotPosCmd(pivotSubsystem, 75, false), new WaitCommand(0.05),
+          new pivotPosCmd(pivotSubsystem, 85, false), new WaitCommand(0.05)))));
     
     operatorController.triangle().whileTrue(new StartEndCommand(
           feederSubsystem::runFeeder,

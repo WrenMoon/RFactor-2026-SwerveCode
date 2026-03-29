@@ -123,8 +123,8 @@ public class SwerveSubsystem extends SubsystemBase {
 
             Pigeon2 imu = new Pigeon2(19);
 
-            LimelightHelpers.SetRobotOrientation("limelight", imu.getYaw().getValueAsDouble(),
-                    0, imu.getPitch().getValueAsDouble(), 0, imu.getRoll().getValueAsDouble(), 0);
+            LimelightHelpers.SetRobotOrientation("limelight", swerveDrive.getOdometryHeading().getDegrees(),
+                    0, 0, 0, 0, 0);
 
             LimelightHelpers.PoseEstimate megaTagPose = LimelightHelpers
                     .getBotPoseEstimate_wpiBlue_MegaTag2("limelight");
@@ -146,6 +146,7 @@ public class SwerveSubsystem extends SubsystemBase {
                     SmartDashboard.putNumber("Vision Odometry/Pose Y:", megaTagPose.pose.getY());
                     SmartDashboard.putNumber("Vision Odometry/Pose Heading:", megaTagPose.pose.getRotation().getDegrees());
                     SmartDashboard.putNumber("Vision Odometry/MegaTagCount", megaTagPose.tagCount);
+                    SmartDashboard.putNumber("Vision Odometry/Swerve Heading", swerveDrive.getOdometryHeading().getDegrees());
                     SmartDashboard.putNumber("Vision Odometry/Yaw", imu.getYaw().getValueAsDouble());
                     SmartDashboard.putNumber("Vision Odometry/Pitch", imu.getPitch().getValueAsDouble());
                     SmartDashboard.putNumber("Vision Odometry/Roll", imu.getRoll().getValueAsDouble());
