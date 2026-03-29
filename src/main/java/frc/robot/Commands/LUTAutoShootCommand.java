@@ -15,6 +15,7 @@ public class LUTAutoShootCommand extends Command {
     private final ShooterSubsystem   shooter;
     private final FeederSubsystem   feeder;
     private double targetRPS;
+    LoggedNetworkNumber TargetRPS = new LoggedNetworkNumber("/Tuning/TargetRPS", 60);
 
     /**
      * A shoot command that uses Lookup table to calculate the required shooter power to reach the target and then runs the shooter
@@ -41,7 +42,8 @@ public class LUTAutoShootCommand extends Command {
     public void execute() {
 
         double distance = SwerveSubsystem.botPose.getTranslation().getDistance(Constants.FieldPoses.Hub);
-        targetRPS = ShooterConstants.SHOOTER_MAP.get(distance);
+        // targetRPS = ShooterConstants.SHOOTER_MAP.get(distance);
+        targetRPS = TargetRPS.getAsDouble();
         shooter.setVelocity(targetRPS);
         
         boolean ready = shooter.isAtSpeed(targetRPS);
@@ -66,6 +68,7 @@ public class LUTAutoShootCommand extends Command {
     public void end(boolean interrupted) {
         shooter.stop();  
         shooter.stop1();
+        feeder.stopFeeder();
 
         // Smartdashboard for debugging
         if (Constants.smartEnable){

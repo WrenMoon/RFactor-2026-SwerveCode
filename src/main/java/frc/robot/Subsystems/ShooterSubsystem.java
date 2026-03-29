@@ -23,9 +23,10 @@ public class ShooterSubsystem extends SubsystemBase {
     private final TalonFX shooter3;
     private final TalonFX shooter4;
     
-    // LoggedNetworkNumber ShooterkP = new LoggedNetworkNumber("/Tuning/ShooterkP", 0.55);
-    // LoggedNetworkNumber ShooterkI = new LoggedNetworkNumber("/Tuning/ShooterkI", 0.0);
-    // LoggedNetworkNumber ShooterkD = new LoggedNetworkNumber("/Tuning/ShooterkD", 0.01);
+    LoggedNetworkNumber ShooterkP = new LoggedNetworkNumber("/Tuning/ShooterkP", 0.22);
+    LoggedNetworkNumber ShooterkI = new LoggedNetworkNumber("/Tuning/ShooterkI", 0.0001);
+    LoggedNetworkNumber ShooterkD = new LoggedNetworkNumber("/Tuning/ShooterkD", 0.01);
+    LoggedNetworkNumber ShooterkV = new LoggedNetworkNumber("/Tuning/ShooterkV", 0.0957);
 
     private final VelocityVoltage velocityReq = new VelocityVoltage(0).withSlot(0).withEnableFOC(true);
     private final DutyCycleOut    stopReq     = new DutyCycleOut(0);
@@ -63,14 +64,15 @@ public class ShooterSubsystem extends SubsystemBase {
         cfg.MotorOutput.NeutralMode = NeutralModeValue.Coast;
         cfg.MotorOutput.Inverted    = invert;
 
-        // cfg.Slot0.kP = ShooterkP.getAsDouble();
-        // cfg.Slot0.kI = ShooterkI.getAsDouble();
-        // cfg.Slot0.kD = ShooterkD.getAsDouble();
+        cfg.Slot0.kP = ShooterkP.getAsDouble();
+        cfg.Slot0.kI = ShooterkI.getAsDouble();
+        cfg.Slot0.kD = ShooterkD.getAsDouble();
+        cfg.Slot0.kV = ShooterkV.getAsDouble();
 
-        cfg.Slot0.kP = Constants.ShooterConstants.SHOOTER_kP;
-        cfg.Slot0.kI = Constants.ShooterConstants.SHOOTER_kI;
-        cfg.Slot0.kD = Constants.ShooterConstants.SHOOTER_kD;
-        cfg.Slot0.kV = Constants.ShooterConstants.SHOOTER_kV;
+        // cfg.Slot0.kP = Constants.ShooterConstants.SHOOTER_kP;
+        // cfg.Slot0.kI = Constants.ShooterConstants.SHOOTER_kI;
+        // cfg.Slot0.kD = Constants.ShooterConstants.SHOOTER_kD;
+        // cfg.Slot0.kV = Constants.ShooterConstants.SHOOTER_kV;
         cfg.Slot0.kS = Constants.ShooterConstants.SHOOTER_kS;
 
         motor.getConfigurator().apply(cfg);

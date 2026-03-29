@@ -84,6 +84,8 @@ public class RobotContainer {
     driverController.povRight().whileTrue(swerve.driveCommand(() -> 0,() -> -Constants.povSpeed, () -> 0,false, false));
     driverController.L1().onTrue(new gridSnap(swerve, driverController));
     driverController.cross().whileTrue(new ParallelCommandGroup(swerve.driveCommand(() -> 0, () -> 0, () -> Constants.FieldPoses.Hub.getY() - swerve.getPose().getY(), ()-> Constants.FieldPoses.Hub.getX() - swerve.getPose().getX()), new SequentialCommandGroup(new WaitCommand(0.5), new LUTAutoShootCommand(shooterSubsystem, feederSubsystem))));
+    // driverController.cross().or(driverController.triangle()).onTrue(getAutonomousCommand());
+    // operatorController.povLeft().or(driverController.circle()).whileTrue(new LUTAutoShootCommand(shooterSubsystem, feederSubsystem));
   
     // Operator bindings
     operatorController.L1().whileTrue(new StartEndCommand(
@@ -119,6 +121,8 @@ public class RobotContainer {
     operatorController.povUp().onTrue(new pivotPosCmd(pivotSubsystem, -20, false));
     operatorController.povDown().onTrue(new pivotPosCmd(pivotSubsystem, 80, false));
     operatorController.R2().whileTrue(new LUTAutoShootCommand(shooterSubsystem, feederSubsystem));
+
+    operatorController.touchpad().onTrue(Commands.runOnce(shooterSubsystem::resetConfig));
 
     NamedCommands.registerCommand("FullIntale", new ParallelCommandGroup(new StartEndCommand(
           intakeSubsystem::runRollerIntake,
@@ -156,6 +160,6 @@ public class RobotContainer {
    * @return Autonomous Command of the robot for the command scheduler
    */
   public Command getAutonomousCommand() {
-    return swerve.getAutonomousCommand("CentreTest");
+    return swerve.getAutonomousCommand("CentrePreload");
   }
 } 
