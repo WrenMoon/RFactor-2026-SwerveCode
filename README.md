@@ -8,4 +8,4 @@ Current Working code of Team RFactor for the 2026 Season.
 - Pathplanner autonomous
 - Motor control using PID and feedforward
 - Automatic setpoints for subsystems
-- Automatic aiming and shooting
+- Automatic aiming and shooting using vision odometry and a lookup table
