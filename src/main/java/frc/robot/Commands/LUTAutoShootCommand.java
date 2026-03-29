@@ -6,21 +6,24 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.Constants.ShooterConstants;
+import frc.robot.Subsystems.FeederSubsystem;
 import frc.robot.Subsystems.ShooterSubsystem;
 import frc.robot.Subsystems.SwerveSubsystem;
 
 public class LUTAutoShootCommand extends Command {
 
     private final ShooterSubsystem   shooter;
+    private final FeederSubsystem   feeder;
     private double targetRPS;
 
     /**
      * A shoot command that uses Lookup table to calculate the required shooter power to reach the target and then runs the shooter
      * @param shooter
      */
-    public LUTAutoShootCommand( ShooterSubsystem shooter)
+    public LUTAutoShootCommand( ShooterSubsystem shooter, FeederSubsystem feeder)
     {
         this.shooter   = shooter;
+        this.feeder = feeder;
         addRequirements(shooter);
     }
 
@@ -45,9 +48,10 @@ public class LUTAutoShootCommand extends Command {
 
         if (ready) {
             shooter.column();
+            feeder.runFeeder();
         } else {
             shooter.stop1();
-
+            feeder.stopFeeder();
         }
 
         // Smartdashboard for debugging

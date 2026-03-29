@@ -32,7 +32,6 @@ import javax.print.attribute.standard.PageRanges;
 import com.pathplanner.lib.auto.NamedCommands;
 
 import frc.robot.Commands.LUTAutoShootCommand;
-import frc.robot.Commands.alignPose;
 import frc.robot.Commands.gridSnap;
 import frc.robot.Commands.pivotPosCmd;
 import frc.robot.Subsystems.*;
@@ -68,7 +67,6 @@ public class RobotContainer {
     //   () -> MathUtil.applyDeadband((-driverController.getRightX()), Constants.ControllerDeadband),
     //   () -> MathUtil.applyDeadband((-driverController.getRightY()), Constants.ControllerDeadband)); //Control heading with right joystick
     
-
     swerve.setDefaultCommand(driveSwerve);
   }
 
@@ -85,8 +83,7 @@ public class RobotContainer {
     driverController.povLeft().whileTrue(swerve.driveCommand(() -> 0,() -> Constants.povSpeed, () -> 0,false, true));
     driverController.povRight().whileTrue(swerve.driveCommand(() -> 0,() -> -Constants.povSpeed, () -> 0,false, false));
     driverController.L1().onTrue(new gridSnap(swerve, driverController));
-    driverController.cross().whileTrue(new ParallelCommandGroup(swerve.driveCommand(() -> 0, () -> 0, () -> Constants.FieldPoses.Hub.getY() - swerve.getPose().getY(), ()-> Constants.FieldPoses.Hub.getX() - swerve.getPose().getX()), new SequentialCommandGroup(new WaitCommand(1), new LUTAutoShootCommand(shooterSubsystem)), new StartEndCommand(feederSubsystem::runFeeder, feederSubsystem::stopFeeder ,feederSubsystem)));
-    // driverController.cross().whileTrue((new SequentialCommandGroup(new alignPose(swerve, swerve.getPose(), Constants.FieldPoses.Hub.getX() - swerve.getPose().getX(), Constants.FieldPoses.Hub.getY() - swerve.getPose().getY()), new LUTAutoShootCommand(shooterSubsystem))));
+    driverController.cross().whileTrue(new ParallelCommandGroup(swerve.driveCommand(() -> 0, () -> 0, () -> Constants.FieldPoses.Hub.getY() - swerve.getPose().getY(), ()-> Constants.FieldPoses.Hub.getX() - swerve.getPose().getX()), new SequentialCommandGroup(new WaitCommand(0.5), new LUTAutoShootCommand(shooterSubsystem, feederSubsystem))));
   
     // Operator bindings
     operatorController.L1().whileTrue(new StartEndCommand(
@@ -104,7 +101,7 @@ public class RobotContainer {
     
     operatorController.triangle().whileTrue(new StartEndCommand(
           feederSubsystem::runFeeder,
-          feederSubsystem::stopFeeder,
+          feederSubsystem::stopFeeder,  
           feederSubsystem));
 
     operatorController.R1().whileTrue(new StartEndCommand(
@@ -121,10 +118,36 @@ public class RobotContainer {
 
     operatorController.povUp().onTrue(new pivotPosCmd(pivotSubsystem, -20, false));
     operatorController.povDown().onTrue(new pivotPosCmd(pivotSubsystem, 80, false));
+    operatorController.R2().whileTrue(new LUTAutoShootCommand(shooterSubsystem, feederSubsystem));
 
-    operatorController.R2().whileTrue(new LUTAutoShootCommand(shooterSubsystem));
-
-    operatorController.touchpad().onTrue(Commands.runOnce(shooterSubsystem::resetConfig));
+    NamedCommands.registerCommand("FullIntale", new ParallelCommandGroup(new StartEndCommand(
+          intakeSubsystem::runRollerIntake,
+          intakeSubsystem::stopRoller,
+          intakeSubsystem), 
+          new RepeatCommand( new SequentialCommandGroup(
+          new pivotPosCmd(pivotSubsystem, 75, false), new WaitCommand(0.05),
+          new pivotPosCmd(pivotSubsystem, 85, false), new WaitCommand(0.05)))));
+    NamedCommands.registerCommand("RollerIntake", new StartEndCommand(
+          intakeSubsystem::runRollerIntake,
+          intakeSubsystem::stopRoller,
+          intakeSubsystem));
+    NamedCommands.registerCommand("RollerOuttake", new StartEndCommand(
+          intakeSubsystem::runRollerOuttake,
+          intakeSubsystem::stopRoller,
+          intakeSubsystem));
+    NamedCommands.registerCommand("RunFeeder", new StartEndCommand(
+          feederSubsystem::runFeeder,
+          feederSubsystem::stopFeeder,  
+          feederSubsystem));
+    NamedCommands.registerCommand("ReverseFeeder", new StartEndCommand(
+          feederSubsystem::reverseFeeder,
+          feederSubsystem::stopFeeder,  
+          feederSubsystem));
+    NamedCommands.registerCommand("GridSnap", new gridSnap(swerve, driverController));
+    NamedCommands.registerCommand("FullShoot", new ParallelCommandGroup(swerve.driveCommand(() -> 0, () -> 0, () -> Constants.FieldPoses.Hub.getY() - swerve.getPose().getY(), ()-> Constants.FieldPoses.Hub.getX() - swerve.getPose().getX()), new SequentialCommandGroup(new WaitCommand(0.5), new LUTAutoShootCommand(shooterSubsystem, feederSubsystem))));
+    NamedCommands.registerCommand("LUTAutoshoot", new LUTAutoShootCommand(shooterSubsystem, feederSubsystem));
+    NamedCommands.registerCommand("IntakeDown", new pivotPosCmd(pivotSubsystem, 80, false));
+    NamedCommands.registerCommand("IntakeUp", new pivotPosCmd(pivotSubsystem, -20, false));
   }
 
 
@@ -133,6 +156,6 @@ public class RobotContainer {
    * @return Autonomous Command of the robot for the command scheduler
    */
   public Command getAutonomousCommand() {
-    return swerve.getAutonomousCommand("autoname");
+    return swerve.getAutonomousCommand("CentreTest");
   }
 } 
