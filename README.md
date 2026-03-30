@@ -1,6 +1,6 @@
 # RFactor-2026-Swerve-Code
 
-Current Working code of Team RFactor for the 2026 Season which will be used for the Gotham Regionals.
+Current Working code of Team RFactor for the 2026 Season which will be used for the New York City Regionals and Gotham Regionals.
 
 ### Key program features include:
 - Field relative and heading controlled swerve drive using YAGSL
