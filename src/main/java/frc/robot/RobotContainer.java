@@ -58,7 +58,6 @@ public class RobotContainer {
 
     // Driver bindings
     driverController.button(10).onTrue(Commands.runOnce(swerve::zeroGyro));
-    driverController.touchpad().whileTrue(swerve.driveCommand(() -> 0,() -> 0, () -> 0,false, true));
     driverController.povUp().whileTrue(swerve.driveCommand(() -> Constants.povSpeed,() -> 0, () -> 0,false, true));
     driverController.povDown().whileTrue(swerve.driveCommand(() -> -Constants.povSpeed,() -> 0, () -> 0,false, true));
     driverController.povLeft().whileTrue(swerve.driveCommand(() -> 0,() -> Constants.povSpeed, () -> 0,false, true));
@@ -79,8 +78,8 @@ public class RobotContainer {
           intakeSubsystem::stopRoller,
           intakeSubsystem), 
           new RepeatCommand( new SequentialCommandGroup(
-          new pivotPosCmd(pivotSubsystem, 75, false), new WaitCommand(0.05),
-          new pivotPosCmd(pivotSubsystem, 85, false), new WaitCommand(0.05)))));
+          new pivotPosCmd(pivotSubsystem, 75, false), new WaitCommand(0.025),
+          new pivotPosCmd(pivotSubsystem, 85, false), new WaitCommand(0.025)))));
     
     operatorController.triangle().whileTrue(new StartEndCommand(
           feederSubsystem::runFeeder,
@@ -91,6 +90,10 @@ public class RobotContainer {
           feederSubsystem::reverseFeeder,
           feederSubsystem::stopFeeder,
           feederSubsystem));
+
+    operatorController.circle().whileTrue(getAutonomousCommand(
+      
+    ));  
           
 
     operatorController.R1().onTrue(
@@ -141,6 +144,7 @@ public class RobotContainer {
    * @return Autonomous Command of the robot for the command scheduler
    */
   public Command getAutonomousCommand() {
-    return swerve.getAutonomousCommand("CentrePreload");
+
+    return swerve.getAutonomousCommand("CentreOutpost");
   }
 } 

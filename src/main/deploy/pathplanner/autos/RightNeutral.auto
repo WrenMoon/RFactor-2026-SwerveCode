@@ -11,19 +11,19 @@
           }
         },
         {
+          "type": "path",
+          "data": {
+            "pathName": "Right4"
+          }
+        },
+        {
           "type": "deadline",
           "data": {
             "commands": [
               {
-                "type": "wait",
+                "type": "path",
                 "data": {
-                  "waitTime": 5.0
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "LUTAutoshoot"
+                  "pathName": "Right7"
                 }
               }
             ]

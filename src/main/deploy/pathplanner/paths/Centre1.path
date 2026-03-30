@@ -12,7 +12,7 @@
         "y": 4.031429870090626
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "c1s"
     },
     {
       "anchor": {
@@ -25,7 +25,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "c1e"
     }
   ],
   "rotationTargets": [],
@@ -45,7 +45,7 @@
     "rotation": 0.0
   },
   "reversed": false,
-  "folder": "Centre",
+  "folder": null,
   "idealStartingState": {
     "velocity": 0,
     "rotation": 0.0

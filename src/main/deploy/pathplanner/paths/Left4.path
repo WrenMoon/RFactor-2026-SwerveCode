@@ -25,7 +25,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "l4e"
     }
   ],
   "rotationTargets": [],
@@ -45,7 +45,7 @@
     "rotation": -25.84721607913438
   },
   "reversed": false,
-  "folder": "Left",
+  "folder": null,
   "idealStartingState": {
     "velocity": 0,
     "rotation": 180.0

@@ -12,7 +12,7 @@ public class Constants {
     public static final double ControllerDeadband = 0.05;
     public static final boolean VisionOdometry = true;
     public static double MAX_SPEED = 5;
-    public static double povSpeed = 0.5;
+    public static double povSpeed = 0.75;
 
     public static final class IntakeConstants {
         public static final int INTAKE_ROLLER_ID = 26;
