@@ -65,7 +65,7 @@ public class RobotContainer {
     driverController.L1().onTrue(new gridSnap(swerve, driverController));
     driverController.cross().whileTrue(new ParallelCommandGroup(swerve.driveCommand(() -> 0, () -> 0, () -> Constants.FieldPoses.Hub.getY() - swerve.getPose().getY(), ()-> Constants.FieldPoses.Hub.getX() - swerve.getPose().getX()), new SequentialCommandGroup(new WaitCommand(0.5), new LUTAutoShootCommand(shooterSubsystem, feederSubsystem))));
     // driverController.cross().or(driverController.triangle()).onTrue(getAutonomousCommand());
-    // operatorController.povLeft().or(driverController.circle()).whileTrue(new LUTAutoShootCommand(shooterSubsystem, feederSubsystem));
+//     operatorController.povLeft().or(driverController.circle()).whileTrue(new LUTAutoShootCommand(shooterSubsystem, feederSubsystem));
   
     // Operator bindings
     operatorController.L1().whileTrue(new StartEndCommand(
@@ -78,8 +78,8 @@ public class RobotContainer {
           intakeSubsystem::stopRoller,
           intakeSubsystem), 
           new RepeatCommand( new SequentialCommandGroup(
-          new pivotPosCmd(pivotSubsystem, 75, false), new WaitCommand(0.025),
-          new pivotPosCmd(pivotSubsystem, 85, false), new WaitCommand(0.025)))));
+          new pivotPosCmd(pivotSubsystem, 75, false), new WaitCommand(0.1),
+          new pivotPosCmd(pivotSubsystem, 85, false), new WaitCommand(0.1)))));
     
     operatorController.triangle().whileTrue(new StartEndCommand(
           feederSubsystem::runFeeder,
@@ -108,7 +108,7 @@ public class RobotContainer {
 
     operatorController.touchpad().onTrue(Commands.runOnce(shooterSubsystem::resetConfig));
 
-    NamedCommands.registerCommand("FullIntale", new ParallelCommandGroup(new StartEndCommand(
+    NamedCommands.registerCommand("FullIntake", new ParallelCommandGroup(new StartEndCommand(
           intakeSubsystem::runRollerIntake,
           intakeSubsystem::stopRoller,
           intakeSubsystem), 
@@ -145,6 +145,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
 
-    return swerve.getAutonomousCommand("CentreOutpost");
+    return swerve.getAutonomousCommand("CentreStation");
   }
 } 

@@ -4,34 +4,34 @@
     {
       "anchor": {
         "x": 7.8219638554216875,
-        "y": 4.603240963855422
+        "y": 2.4941927710843377
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.633819681744966,
-        "y": 4.76786711582255
+        "x": 8.306626226995249,
+        "y": 2.5509295194509756
       },
       "isLocked": false,
-      "linkedName": "l6e"
+      "linkedName": "Centre9end"
     },
     {
       "anchor": {
-        "x": 6.9040361445783125,
-        "y": 5.4028192094250365
+        "x": 2.7733614457831326,
+        "y": 2.4941927710843377
       },
       "prevControl": {
-        "x": 7.1444457831325305,
-        "y": 5.193337349397591
+        "x": 2.2399294672023395,
+        "y": 2.513866248325714
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "l7e"
+      "linkedName": null
     }
   ],
   "rotationTargets": [
     {
       "waypointRelativePos": 0.5,
-      "rotationDegrees": -135.0
+      "rotationDegrees": 45.0
     }
   ],
   "constraintZones": [],
@@ -47,13 +47,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -135.0
+    "rotation": 45.0
   },
   "reversed": false,
-  "folder": "Left",
+  "folder": "Centre",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -90.0
+    "rotation": 0.0
   },
   "useDefaultConstraints": true
 }

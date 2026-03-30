@@ -23,7 +23,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "LUTAutoshoot"
+                  "name": "FullShoot"
                 }
               }
             ]
@@ -33,6 +33,6 @@
     }
   },
   "resetOdom": true,
-  "folder": null,
+  "folder": "Left",
   "choreoAuto": false
 }

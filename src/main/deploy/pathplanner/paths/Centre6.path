@@ -3,37 +3,32 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.8219638554216875,
-        "y": 4.603240963855422
+        "x": 6.630843373500386,
+        "y": 5.5
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.633819681744966,
-        "y": 4.76786711582255
+        "x": 7.782880191666285,
+        "y": 5.486230526630965
       },
       "isLocked": false,
-      "linkedName": "l6e"
+      "linkedName": "Centre5end"
     },
     {
       "anchor": {
-        "x": 6.9040361445783125,
-        "y": 5.4028192094250365
+        "x": 7.83289156626506,
+        "y": 5.5
       },
       "prevControl": {
-        "x": 7.1444457831325305,
-        "y": 5.193337349397591
+        "x": 6.600717797953212,
+        "y": 5.529594904866695
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "l7e"
+      "linkedName": "Centre6end"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.5,
-      "rotationDegrees": -135.0
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
@@ -47,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -135.0
+    "rotation": 0.0
   },
   "reversed": false,
-  "folder": "Left",
+  "folder": "Centre",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -90.0
+    "rotation": 0.0
   },
   "useDefaultConstraints": true
 }
