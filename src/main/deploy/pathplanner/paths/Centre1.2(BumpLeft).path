@@ -8,27 +8,32 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.169381935313647,
-        "y": 3.8320925833341235
+        "x": 2.1750631978162884,
+        "y": 4.230310833153282
       },
-      "isLocked": false,
-      "linkedName": "Centre1end"
+      "isLocked": true,
+      "linkedName": "CentrePreloadShoot"
     },
     {
       "anchor": {
-        "x": 3.4508795180722887,
-        "y": 2.4941927710843377
+        "x": 3.45,
+        "y": 5.5
       },
       "prevControl": {
-        "x": 3.2734642751002934,
-        "y": 2.6703286037850913
+        "x": 2.7083606971367993,
+        "y": 4.758360697136798
       },
       "nextControl": null,
-      "isLocked": false,
-      "linkedName": "Centre1.4end"
+      "isLocked": true,
+      "linkedName": "CentreLeftBump45"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1,
+      "rotationDegrees": 0.0
+    }
+  ],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
@@ -42,10 +47,10 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 45.0
+    "rotation": -45.0
   },
   "reversed": false,
-  "folder": "Centre",
+  "folder": "Center",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 0.0

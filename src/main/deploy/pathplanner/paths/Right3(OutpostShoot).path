@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.6,
-        "y": 6.0
+        "x": 0.7,
+        "y": 0.659
       },
       "prevControl": null,
       "nextControl": {
-        "x": 0.3676042455803104,
-        "y": 5.907846794262471
+        "x": 0.9996122515857038,
+        "y": 1.9251581978229357
       },
-      "isLocked": false,
-      "linkedName": null
+      "isLocked": true,
+      "linkedName": "RightHumanPlayerStation"
     },
     {
       "anchor": {
-        "x": 2.7187228915662653,
-        "y": 5.641373493975904
+        "x": 2.04,
+        "y": 1.933
       },
       "prevControl": {
-        "x": 2.991458197473145,
-        "y": 5.544576401489769
+        "x": 1.1886635858711188,
+        "y": 0.8274486025370669
       },
       "nextControl": null,
-      "isLocked": false,
-      "linkedName": "l4e"
+      "isLocked": true,
+      "linkedName": "RightPreloadShoot"
     }
   ],
   "rotationTargets": [],
@@ -42,10 +42,10 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -45.0
+    "rotation": 39.238
   },
   "reversed": false,
-  "folder": "Left",
+  "folder": "Right",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 180.0

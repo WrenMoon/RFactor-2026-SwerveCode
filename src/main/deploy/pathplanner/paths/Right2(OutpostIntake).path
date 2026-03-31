@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.5457829553053006,
-        "y": 4.035
+        "x": 2.04,
+        "y": 1.933
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.914258782420764,
-        "y": 4.031429870090626
+        "x": 1.1142065209015515,
+        "y": 1.3676383601371502
       },
-      "isLocked": false,
-      "linkedName": "c1s"
+      "isLocked": true,
+      "linkedName": "RightPreloadShoot"
     },
     {
       "anchor": {
-        "x": 2.0,
-        "y": 4.035
+        "x": 0.7,
+        "y": 0.659
       },
       "prevControl": {
-        "x": 2.4739193801467096,
-        "y": 4.038536528025558
+        "x": 2.0336907546530654,
+        "y": 1.6476918476303861
       },
       "nextControl": null,
-      "isLocked": false,
-      "linkedName": "c1e"
+      "isLocked": true,
+      "linkedName": "RightHumanPlayerStation"
     }
   ],
   "rotationTargets": [],
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 180.0
   },
   "reversed": false,
-  "folder": "Centre",
+  "folder": "Right",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 39.238
   },
   "useDefaultConstraints": true
 }

@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Centre1"
+            "pathName": "Centre1(PreloadPos)"
           }
         },
         {
@@ -32,7 +32,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Centre2.2"
+            "pathName": "Centre2.2(Outpost)"
           }
         },
         {
@@ -57,7 +57,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Centre3.2"
+            "pathName": "Centre3.2(OutpostShoot)"
           }
         },
         {
@@ -83,6 +83,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "Centre",
+  "folder": "CentreAuto",
   "choreoAuto": false
 }

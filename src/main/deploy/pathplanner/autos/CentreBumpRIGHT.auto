@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Centre1"
+            "pathName": "Centre1(PreloadPos)"
           }
         },
         {
@@ -32,7 +32,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Centre1.4"
+            "pathName": "Centre1.4(BumpRight)"
           }
         },
         {
@@ -102,6 +102,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "Centre",
+  "folder": "CentreAuto",
   "choreoAuto": false
 }

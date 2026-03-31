@@ -8,11 +8,11 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.313135449620627,
-        "y": 5.284984273161854
+        "x": 2.3471807228915655,
+        "y": 5.761578313253012
       },
-      "isLocked": false,
-      "linkedName": "l2s"
+      "isLocked": true,
+      "linkedName": "LeftPreloadShoot"
     },
     {
       "anchor": {
@@ -24,8 +24,8 @@
         "y": 6.100676491432914
       },
       "nextControl": null,
-      "isLocked": false,
-      "linkedName": null
+      "isLocked": true,
+      "linkedName": "LeftOutpostIntake"
     }
   ],
   "rotationTargets": [],

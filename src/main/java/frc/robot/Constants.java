@@ -15,19 +15,21 @@ public class Constants {
     public static double povSpeed = 0.75;
 
     public static final class IntakeConstants {
-        public static final int INTAKE_ROLLER_ID = 26;
+        public static final int INTAKE_ROLLER_ID = 26;  
         public static final int INTAKE_PIVOT_ID  = 25;
 
         public static final double PIVOT_kP = 0.02;
+        // public static final double PIVOT_kP = 0.02;
         public static final double PIVOT_kI = 0.0;
-        public static final double PIVOT_kD = 0;
+        public static final double PIVOT_kD = 0.0;
+        public static final double PIVOT_FEEDFORWARD = 0.001;
 
-        public static final double PIVOT_GEAR_RATIO    = 400.0;
+        public static final double PIVOT_GEAR_RATIO    = 16.2;
 
         public static final double ROLLER_INTAKE_SPEED  =  0.9;
         public static final double ROLLER_OUTTAKE_SPEED = -0.9;
 
-        public static final double PivotMaxSpeed = 0.15;
+        public static final double PivotMaxSpeed = 0.12;
     }
 
     public static final class FeederConstants {
@@ -43,10 +45,10 @@ public class Constants {
         public static final int SHOOTER_3_ID = 23;
         public static final int SHOOTER_4_ID = 24;
 
-        public static final double SHOOTER_kP = 0.22;
-        public static final double SHOOTER_kI = 0.0001;
-        public static final double SHOOTER_kD = 0.01;
-        public static final double SHOOTER_kV = 0.0957;
+        public static final double SHOOTER_kP = 0.5;
+        public static final double SHOOTER_kI = 0.0;
+        public static final double SHOOTER_kD = 0.0;
+        public static final double SHOOTER_kV = 0.113;
         public static final double SHOOTER_kS = 0.0;
 
         public static final double SHOOT_VELOCITY_RPS   =  47.0;
@@ -66,14 +68,13 @@ public class Constants {
             new InterpolatingDoubleTreeMap();
 
         static {
-            SHOOTER_MAP.put(0.0, 45.0);
-            SHOOTER_MAP.put(1.75, 55.0);
-            SHOOTER_MAP.put(1.95, 57.0);
-            SHOOTER_MAP.put(2.5, 60.0);
-            SHOOTER_MAP.put(3.0, 63.0);
-            SHOOTER_MAP.put(3.25, 66.0);
-            SHOOTER_MAP.put(3.5, 67.0);
-            SHOOTER_MAP.put(4.0, 70.0);
+            SHOOTER_MAP.put(0.0, 49.0);
+            SHOOTER_MAP.put(1.99, 53.0);
+            SHOOTER_MAP.put(2.56, 54.0);
+            SHOOTER_MAP.put(3.08, 57.0);
+            SHOOTER_MAP.put(3.6, 60.0);
+            SHOOTER_MAP.put(4.49, 63.0);
+            SHOOTER_MAP.put(5.0, 67.0);
             SHOOTER_MAP.put(200.0,100.0);
         }
     }

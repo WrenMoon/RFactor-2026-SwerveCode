@@ -63,14 +63,14 @@ public class ShooterSubsystem extends SubsystemBase {
         cfg.MotorOutput.NeutralMode = NeutralModeValue.Coast;
         cfg.MotorOutput.Inverted    = invert;
 
-        cfg.Slot0.kP = ShooterkP.getAsDouble();
-        cfg.Slot0.kI = ShooterkI.getAsDouble();
-        cfg.Slot0.kD = ShooterkD.getAsDouble();
-        cfg.Slot0.kV = ShooterkV.getAsDouble();
-        // cfg.Slot0.kP = Constants.ShooterConstants.SHOOTER_kP;
-        // cfg.Slot0.kI = Constants.ShooterConstants.SHOOTER_kI;
-        // cfg.Slot0.kD = Constants.ShooterConstants.SHOOTER_kD;
-        // cfg.Slot0.kV = Constants.ShooterConstants.SHOOTER_kV;
+        // cfg.Slot0.kP = ShooterkP.getAsDouble();
+        // cfg.Slot0.kI = ShooterkI.getAsDouble();
+        // cfg.Slot0.kD = ShooterkD.getAsDouble();
+        // cfg.Slot0.kV = ShooterkV.getAsDouble();
+        cfg.Slot0.kP = Constants.ShooterConstants.SHOOTER_kP;
+        cfg.Slot0.kI = Constants.ShooterConstants.SHOOTER_kI;
+        cfg.Slot0.kD = Constants.ShooterConstants.SHOOTER_kD;
+        cfg.Slot0.kV = Constants.ShooterConstants.SHOOTER_kV;
         cfg.Slot0.kS = Constants.ShooterConstants.SHOOTER_kS;
 
         motor.getConfigurator().apply(cfg);

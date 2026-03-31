@@ -3,37 +3,32 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 9.756168674698795,
-        "y": 2.811
+        "x": 7.756397590361445,
+        "y": 3.335626506024097
       },
       "prevControl": null,
       "nextControl": {
-        "x": 10.712285186095984,
-        "y": 2.5829090776530865
+        "x": 7.5682534166847235,
+        "y": 3.5002526579912274
       },
-      "isLocked": false,
-      "linkedName": null
+      "isLocked": true,
+      "linkedName": "NeutralBetweenBallsRight"
     },
     {
       "anchor": {
-        "x": 6.9040361445783125,
-        "y": 2.811
+        "x": 5.822192771084336,
+        "y": 2.461409638554217
       },
       "prevControl": {
-        "x": 6.667672028971755,
-        "y": 2.892437122085262
+        "x": 6.193734939759036,
+        "y": 2.690891566265061
       },
       "nextControl": null,
-      "isLocked": false,
-      "linkedName": null
+      "isLocked": true,
+      "linkedName": "ComingBackFromNeutralRightBump"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.5,
-      "rotationDegrees": -135.0
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
@@ -47,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -135.0
+    "rotation": 45.0
   },
   "reversed": false,
   "folder": "Right",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 90.0
   },
   "useDefaultConstraints": true
 }

@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 6.718265060240964,
-        "y": 2.4941927710843377
+        "x": 6.849397590361446,
+        "y": 1.483
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.718265060240964,
-        "y": 2.4941927710843377
+        "x": 7.849397590361446,
+        "y": 1.483
       },
-      "isLocked": false,
-      "linkedName": "Centre8end"
+      "isLocked": true,
+      "linkedName": "RightBumpBallStart"
     },
     {
       "anchor": {
-        "x": 7.8219638554216875,
-        "y": 2.4941927710843377
+        "x": 7.756397590361445,
+        "y": 3.335626506024097
       },
       "prevControl": {
-        "x": 6.8219638554216875,
-        "y": 2.4941927710843377
+        "x": 7.9640240963855415,
+        "y": 2.363060240963856
       },
       "nextControl": null,
-      "isLocked": false,
-      "linkedName": "Centre9end"
+      "isLocked": true,
+      "linkedName": "NeutralBetweenBallsRight"
     }
   ],
   "rotationTargets": [],
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 90.0
   },
   "reversed": false,
-  "folder": "Centre",
+  "folder": "Center",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 45.0
   },
   "useDefaultConstraints": true
 }

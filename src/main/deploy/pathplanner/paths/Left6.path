@@ -3,37 +3,42 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.384855421686748,
-        "y": 5.4028192094250365
+        "x": 3.5273734939759036,
+        "y": 5.5
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.866661563813747,
-        "y": 4.866940534080088
+        "x": 5.975180722891566,
+        "y": 5.073132530120482
       },
-      "isLocked": false,
-      "linkedName": "l5e"
+      "isLocked": true,
+      "linkedName": "LeftBump45"
     },
     {
       "anchor": {
-        "x": 7.8219638554216875,
-        "y": 4.603240963855422
+        "x": 6.849397590361446,
+        "y": 6.482807228915663
       },
       "prevControl": {
-        "x": 7.623237467892336,
-        "y": 4.754924261879739
+        "x": 6.3759256004932094,
+        "y": 6.521716412536613
       },
       "nextControl": null,
-      "isLocked": false,
-      "linkedName": "l6e"
+      "isLocked": true,
+      "linkedName": "LeftBumpBallStart"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.44564315352698347,
+      "rotationDegrees": -45.0
+    }
+  ],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
+    "maxVelocity": 2.0,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
@@ -42,7 +47,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -90.0
+    "rotation": -45.0
   },
   "reversed": false,
   "folder": "Left",
@@ -50,5 +55,5 @@
     "velocity": 0,
     "rotation": -45.0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

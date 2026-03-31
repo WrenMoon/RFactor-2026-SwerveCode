@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@frc-web-components/fwc": "^3.4.0"
+  }
+}

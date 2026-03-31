@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Centre1"
+            "pathName": "Centre1(PreloadPos)"
           }
         },
         {
@@ -23,7 +23,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "LUTAutoshoot"
+                  "name": "FullShoot"
                 }
               }
             ]
@@ -32,7 +32,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Centre2"
+            "pathName": "Centre2(Depot)"
           }
         },
         {
@@ -46,7 +46,7 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "Centre3"
+                        "pathName": "Centre3(DepotIntake)"
                       }
                     },
                     {
@@ -70,7 +70,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Centre4"
+            "pathName": "Centre4(DepotShoot)"
           }
         },
         {
@@ -86,7 +86,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "LUTAutoshoot"
+                  "name": "FullShoot"
                 }
               }
             ]
@@ -96,6 +96,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "Centre",
+  "folder": "CentreAuto",
   "choreoAuto": false
 }

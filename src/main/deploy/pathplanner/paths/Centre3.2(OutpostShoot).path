@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.3,
-        "y": 6.0
+        "x": 0.8,
+        "y": 0.6592341589337696
       },
       "prevControl": null,
       "nextControl": {
-        "x": 0.8198875074671659,
-        "y": 5.999650871080265
+        "x": 1.0971776584477995,
+        "y": 1.9107187805136663
       },
-      "isLocked": false,
-      "linkedName": null
+      "isLocked": true,
+      "linkedName": "CentreHumanPlayerStation"
     },
     {
       "anchor": {
-        "x": 0.9,
-        "y": 6.0
+        "x": 2.04,
+        "y": 1.933
       },
       "prevControl": {
-        "x": 1.1507214373310028,
-        "y": 5.998830095431328
+        "x": 1.1718005559817648,
+        "y": 0.853022909173639
       },
       "nextControl": null,
-      "isLocked": false,
-      "linkedName": null
+      "isLocked": true,
+      "linkedName": "RightPreloadShoot"
     }
   ],
   "rotationTargets": [],
@@ -42,10 +42,10 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 39.238
   },
   "reversed": false,
-  "folder": "Centre",
+  "folder": "Center",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 180.0

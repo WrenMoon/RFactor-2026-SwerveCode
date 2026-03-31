@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Right1"
+            "pathName": "Right1(PreloadPos)"
           }
         },
         {
@@ -23,7 +23,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "LUTAutoshoot"
+                  "name": "FullShoot"
                 }
               }
             ]
@@ -33,6 +33,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "Right",
+  "folder": "RightAuto",
   "choreoAuto": false
 }

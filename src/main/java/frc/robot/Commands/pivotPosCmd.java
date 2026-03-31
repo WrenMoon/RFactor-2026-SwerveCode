@@ -12,7 +12,7 @@ public class pivotPosCmd extends Command {
     private final double targetPose;
     private final boolean holdPID;
     private PIDController PIDintake;
-    private boolean endLoop = false;
+    private boolean endLoop = false;    
 
     /**
      * A command to move the pivot to an angle setpoint using PID Feedback.
@@ -58,7 +58,7 @@ public class pivotPosCmd extends Command {
             endLoop = true;
         }
 
-        pivot.setPivotMotor(speed); // applies the speed to the motor
+        pivot.setPivotMotor(speed + pivot.getPivotAngle()*Constants.IntakeConstants.PIVOT_FEEDFORWARD); // applies the speed to the motor
     }
 
     @Override

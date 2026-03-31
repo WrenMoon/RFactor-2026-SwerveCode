@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Left1"
+            "pathName": "Left1(PreloadPos)"
           }
         },
         {
@@ -23,7 +23,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "LUTAutoshoot"
+                  "name": "FullShoot"
                 }
               }
             ]
@@ -32,7 +32,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Left2"
+            "pathName": "Left2(Depot)"
           }
         },
         {
@@ -46,7 +46,7 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "Left3"
+                        "pathName": "Left3(DepotIntake)"
                       }
                     },
                     {
@@ -70,7 +70,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Left4"
+            "pathName": "Left4(DepotShoot)"
           }
         },
         {
@@ -86,7 +86,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "LUTAutoshoot"
+                  "name": "FullShoot"
                 }
               }
             ]
@@ -96,6 +96,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "Left",
+  "folder": "LeftAuto",
   "choreoAuto": false
 }

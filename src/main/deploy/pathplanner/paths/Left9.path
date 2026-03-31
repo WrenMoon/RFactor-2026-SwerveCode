@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.4618072289156623,
-        "y": 2.5
+        "x": 5.833120481927711,
+        "y": 5.41189156626506
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.432896685546565,
-        "y": 2.5
+        "x": 4.281385542168675,
+        "y": 5.44467469879518
       },
-      "isLocked": false,
-      "linkedName": "r1e"
+      "isLocked": true,
+      "linkedName": "ComingBackFromNeutralLeftBump"
     },
     {
       "anchor": {
-        "x": 6.92589156626506,
-        "y": 2.811096385542169
+        "x": 2.9263493975903616,
+        "y": 5.619518072289156
       },
       "prevControl": {
-        "x": 6.428682770487939,
-        "y": 2.418394733834718
+        "x": 3.7549602757102325,
+        "y": 5.556405053120677
       },
       "nextControl": null,
-      "isLocked": false,
-      "linkedName": "r4e"
+      "isLocked": true,
+      "linkedName": "LeftPreloadShoot"
     }
   ],
   "rotationTargets": [
@@ -38,7 +38,7 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
+    "maxVelocity": 2.0,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
@@ -47,13 +47,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": -42.812
   },
   "reversed": false,
-  "folder": "Right",
+  "folder": "Left",
   "idealStartingState": {
-    "velocity": 0,
-    "rotation": 39.238
+    "velocity": 0.0,
+    "rotation": -45.0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

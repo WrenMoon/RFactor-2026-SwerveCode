@@ -3,37 +3,32 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.0,
-        "y": 4.035
+        "x": 6.849397590361446,
+        "y": 1.483
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.1750631978162884,
-        "y": 4.230310833153282
+        "x": 8.11701204819277,
+        "y": 1.0954457831325295
       },
-      "isLocked": false,
-      "linkedName": "Centre1end"
+      "isLocked": true,
+      "linkedName": "RightBumpBallStart"
     },
     {
       "anchor": {
-        "x": 3.45,
-        "y": 5.5
+        "x": 7.756397590361445,
+        "y": 3.335626506024097
       },
       "prevControl": {
-        "x": 2.7083606971367993,
-        "y": 4.758360697136798
+        "x": 7.4176385542168655,
+        "y": 3.245072289156627
       },
       "nextControl": null,
-      "isLocked": false,
-      "linkedName": "Centre1.2end"
+      "isLocked": true,
+      "linkedName": "NeutralBetweenBallsRight"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 1,
-      "rotationDegrees": 0.0
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
@@ -47,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -45.0
+    "rotation": 90.0
   },
   "reversed": false,
-  "folder": "Centre",
+  "folder": "Right",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 45.0
   },
   "useDefaultConstraints": true
 }

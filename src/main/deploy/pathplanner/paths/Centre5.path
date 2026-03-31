@@ -11,30 +11,48 @@
         "x": 3.7281306493656254,
         "y": 5.498887146699321
       },
-      "isLocked": false,
-      "linkedName": "Centre1.2end"
+      "isLocked": true,
+      "linkedName": "CentreLeftBump45"
     },
     {
       "anchor": {
-        "x": 6.630843373500386,
-        "y": 5.5
+        "x": 6.849397590361446,
+        "y": 6.482807228915663
       },
       "prevControl": {
-        "x": 3.245818893891534,
-        "y": 5.528608612181813
+        "x": 6.412289156626506,
+        "y": 5.302614457831326
       },
       "nextControl": null,
-      "isLocked": false,
-      "linkedName": "Centre5end"
+      "isLocked": true,
+      "linkedName": "LeftBumpBallStart"
     }
   ],
   "rotationTargets": [
     {
       "waypointRelativePos": 0.8803149606299222,
       "rotationDegrees": -45.0
+    },
+    {
+      "waypointRelativePos": 1,
+      "rotationDegrees": 0.0
     }
   ],
-  "constraintZones": [],
+  "constraintZones": [
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0.2246346555323665,
+      "maxWaypointRelativePos": 0.5453027139874728,
+      "constraints": {
+        "maxVelocity": 1.5,
+        "maxAcceleration": 3.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    }
+  ],
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
@@ -47,13 +65,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": -45.0
   },
   "reversed": false,
-  "folder": "Centre",
+  "folder": "Center",
   "idealStartingState": {
     "velocity": 0,
     "rotation": -45.0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

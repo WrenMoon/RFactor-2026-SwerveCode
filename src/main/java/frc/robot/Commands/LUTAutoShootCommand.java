@@ -5,6 +5,7 @@ import org.littletonrobotics.junction.networktables.LoggedNetworkNumber;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
+import frc.robot.Constants.ShooterConstants;
 import frc.robot.Subsystems.FeederSubsystem;
 import frc.robot.Subsystems.ShooterSubsystem;
 import frc.robot.Subsystems.SwerveSubsystem;
@@ -40,8 +41,8 @@ public class LUTAutoShootCommand extends Command {
     public void execute() {
 
         double distance = SwerveSubsystem.botPose.getTranslation().getDistance(Constants.FieldPoses.Hub);
-        // targetRPS = ShooterConstants.SHOOTER_MAP.get(distance);
-        targetRPS = TargetRPS.getAsDouble();
+        targetRPS = ShooterConstants.SHOOTER_MAP.get(distance);
+        // targetRPS = TargetRPS.getAsDouble();
         shooter.setVelocity(targetRPS);
         
         boolean ready = shooter.isAtSpeed(targetRPS);
