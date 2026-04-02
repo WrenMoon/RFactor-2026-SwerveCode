@@ -58,7 +58,7 @@ public class pivotPosCmd extends Command {
             endLoop = true;
         }
 
-        pivot.setPivotMotor(speed + pivot.getPivotAngle()*Constants.IntakeConstants.PIVOT_FEEDFORWARD); // applies the speed to the motor
+        pivot.setPivotMotor(speed); // applies the speed to the motor
     }
 
     @Override

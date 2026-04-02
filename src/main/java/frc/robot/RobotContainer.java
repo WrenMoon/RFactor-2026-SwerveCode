@@ -16,9 +16,12 @@ import java.io.File;
 import com.pathplanner.lib.auto.NamedCommands;
 import frc.robot.Commands.*;
 import frc.robot.Subsystems.*;
+import com.pathplanner.lib.auto.AutoBuilder;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RobotContainer {
-
+      private SendableChooser<Command> autoChooser;
       // Creating all the subsystems
       private final SwerveSubsystem swerve = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
                   "JsonConstants"));
@@ -107,15 +110,23 @@ public class RobotContainer {
                                                 feederSubsystem::stopFeeder,
                                                 feederSubsystem)));
 
-            operatorController.L2().whileTrue(new ParallelCommandGroup(new StartEndCommand(
-                        intakeSubsystem::runRollerIntake,
-                        intakeSubsystem::stopRoller,
+            operatorController.L2().whileTrue(new StartEndCommand(
+                        intakeSubsystem::runRollerIntake,         
+                        intakeSubsystem::stopRoller,  
+                        intakeSubsystem));
+                        // new RepeatCommand(new SequentialCommandGroup(
+                        //             new pivotPosCmd(pivotSubsystem, 89, false), new WaitCommand(0.4),
+                        //             new pivotPosCmd(pivotSubsystem, 90, false), new WaitCommand(0.4)))));
+
+            operatorController.povLeft().whileTrue(new ParallelCommandGroup(new StartEndCommand(
+                        intakeSubsystem::runRollerIntake,         
+                        intakeSubsystem::stopRoller,  
                         intakeSubsystem),
                         new RepeatCommand(new SequentialCommandGroup(
-                                    new pivotPosCmd(pivotSubsystem, 90, false), new WaitCommand(0.1),
-                                    new pivotPosCmd(pivotSubsystem, 85, false), new WaitCommand(0.1)))));
+                              new pivotPosCmd(pivotSubsystem, 90, false), new WaitCommand(1),
+                              new pivotPosCmd(pivotSubsystem, 87, false), new WaitCommand(1)))));
 
-            operatorController.R1().whileTrue(new StartEndCommand(
+            operatorController.L2().whileTrue(new StartEndCommand(
                         feederSubsystem::runFeeder,
                         feederSubsystem::stopFeeder,
                         feederSubsystem));
@@ -162,6 +173,9 @@ public class RobotContainer {
             NamedCommands.registerCommand("LUTAutoshoot", new LUTAutoShootCommand(shooterSubsystem, feederSubsystem));
             NamedCommands.registerCommand("IntakeDown", new pivotPosCmd(pivotSubsystem, 90, false));
             NamedCommands.registerCommand("IntakeUp", new pivotPosCmd(pivotSubsystem, -20, false));
+
+            autoChooser = AutoBuilder.buildAutoChooser();
+            SmartDashboard.putData("Auto Chooser", autoChooser);
       }
       
       /**
@@ -171,7 +185,7 @@ public class RobotContainer {
        * @return Autonomous Command of the robot for the command scheduler
        */
       public Command getAutonomousCommand() {
-
-            return swerve.getAutonomousCommand("CentreStation");
+            return autoChooser.getSelected();
       }
 }
+

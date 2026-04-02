@@ -32,7 +32,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Centre2.2(Outpost)"
+            "pathName": "Centre2(Depot)"
           }
         },
         {
@@ -40,15 +40,28 @@
           "data": {
             "commands": [
               {
-                "type": "wait",
+                "type": "sequential",
                 "data": {
-                  "waitTime": 5.0
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "Centre3(DepotIntake)"
+                      }
+                    },
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 2.0
+                      }
+                    }
+                  ]
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "IntakeDown"
+                  "name": "FullIntake"
                 }
               }
             ]
@@ -57,7 +70,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Centre3.2(OutpostShoot)"
+            "pathName": "Centre4(DepotShoot)"
           }
         },
         {

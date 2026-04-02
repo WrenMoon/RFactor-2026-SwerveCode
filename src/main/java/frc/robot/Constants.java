@@ -26,16 +26,16 @@ public class Constants {
 
         public static final double PIVOT_GEAR_RATIO    = 16.2;
 
-        public static final double ROLLER_INTAKE_SPEED  =  0.9;
-        public static final double ROLLER_OUTTAKE_SPEED = -0.9;
+        public static final double ROLLER_INTAKE_SPEED  =  0.8;
+        public static final double ROLLER_OUTTAKE_SPEED = -0.8;
 
-        public static final double PivotMaxSpeed = 0.12;
+        public static final double PivotMaxSpeed = 0.1;
     }
 
     public static final class FeederConstants {
         public static final int FEEDER_ID = 27;
 
-        public static final double FEEDER_SPEED         = -0.35;
+        public static final double FEEDER_SPEED         = -0.25;
         public static final double FEEDER_REVERSE_SPEED = 0.35;
     }
 
@@ -72,7 +72,7 @@ public class Constants {
             SHOOTER_MAP.put(1.99, 53.0);
             SHOOTER_MAP.put(2.56, 54.0);
             SHOOTER_MAP.put(3.08, 57.0);
-            SHOOTER_MAP.put(3.6, 60.0);
+            SHOOTER_MAP.put(3.6, 61.0);
             SHOOTER_MAP.put(4.49, 63.0);
             SHOOTER_MAP.put(5.0, 67.0);
             SHOOTER_MAP.put(200.0,100.0);
